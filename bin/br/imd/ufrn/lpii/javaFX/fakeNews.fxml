@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Arco" prefHeight="445.0" prefWidth="700.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.imd.ufrn.lpii.javaFX.Pagina1">
+   <children>
+      <Label layoutX="117.0" layoutY="15.0" text="FAKE NEWS" textFill="WHITE" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="Arial Bold" size="61.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="layer1" layoutX="213.0" layoutY="81.0" prefHeight="116.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="81.0">
+         <children>
+            <AnchorPane prefHeight="59.0" prefWidth="560.0" style="-fx-border-color: white; -fx-border-style: solid; -fx-border-radius: 10; -fx-border-width: 2;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField fx:id="Mensagem" layoutX="88.0" layoutY="14.0" prefHeight="27.0" prefWidth="384.0" promptText="C:/" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="14.0" />
+                  <Button layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#buscarData" text="Buscar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                  <Label layoutX="14.0" layoutY="18.0" text="DataSet:" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="18.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <Button cancelButton="true" layoutX="419.0" layoutY="75.0" mnemonicParsing="false" onAction="#botaoCancelar" text="Cancelar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="108.0" />
+            <Button fx:id="botaoProximo1" disable="true" layoutX="503.0" layoutY="75.0" mnemonicParsing="false" onAction="#botaoProximo1" text="Proximo&gt;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0" />
+            <Label fx:id="texto" layoutX="20.0" layoutY="87.0" textFill="RED" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="20.0" />
+            <ProgressBar layoutX="217.0" layoutY="62.0" prefWidth="200.0" progress="0.0" scaleY="0.5" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="layer2" layoutX="200.0" layoutY="81.0" prefHeight="282.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="81.0">
+         <children>
+            <Button fx:id="botaoFinalizar" disable="true" layoutX="502.0" layoutY="241.0" mnemonicParsing="false" onAction="#gerarGrafico" text="Finalizar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="28.0" />
+            <Button layoutX="421.0" layoutY="241.0" mnemonicParsing="false" onAction="#botaoCancelar" text="Cancelar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="108.0" />
+            <Button layoutX="333.0" layoutY="241.0" mnemonicParsing="false" onAction="#acaoBotaoAnterior" text="&lt;Anterior" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="191.0" />
+            <AnchorPane layoutX="200.0" layoutY="37.0" prefHeight="298.0" prefWidth="329.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-style: solid;" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane disable="true" layoutX="4.0" layoutY="61.0" prefHeight="297.0" prefWidth="286.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox fx:id="checkBoxTrigram" mnemonicParsing="false" onAction="#acaoCheckBox" stylesheets="@../css/RadioButtom.css" text="Algoritmo Trigram" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="170.0" />
+                        <CheckBox fx:id="checkBoxLevens" mnemonicParsing="false" onAction="#acaoCheckBox" stylesheets="@../css/RadioButtom.css" text="Similaridade de Levenshtein" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="135.0" />
+                        <Label layoutX="26.0" layoutY="68.0" text="Similaridade:" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="68.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="checkBoxCosine" mnemonicParsing="false" onAction="#acaoCheckBox" stylesheets="@../css/RadioButtom.css" text="Algoritmo de Cosine" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="100.0" />
+                        <CheckBox fx:id="checkBoxJaro" mnemonicParsing="false" onAction="#acaoCheckBox" stylesheets="@../css/RadioButtom.css" text="Algoritmo de Jaro-Winkler" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="205.0" />
+                        <Slider layoutX="237.0" layoutY="248.0" majorTickUnit="1.0" min="85.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" stylesheets="@../css/RadioButtom.css" value="85.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                     </children>
+                  </AnchorPane>
+                  <TextField layoutX="74.0" layoutY="20.0" prefHeight="27.0" prefWidth="431.0" promptText="http://" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="18.0" />
+                  <Button mnemonicParsing="false" text="Ir" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="18.0" />
+                  <Label layoutX="14.0" layoutY="18.0" text="Site:" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="18.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="24.0" layoutY="55.0" prefHeight="0.0" prefWidth="516.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="55.0" />
+               </children>
+            </AnchorPane>
+            <ProgressBar layoutX="200.0" layoutY="254.0" prefWidth="200.0" progress="0.5" scaleY="0.5" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+            <BarChart fx:id="graficoLinha" layoutX="370.0" layoutY="5.0" prefHeight="287.0" prefWidth="345.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="355.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+              <xAxis>
+                <CategoryAxis endMargin="0.0" side="BOTTOM" startMargin="0.0" fx:id="x" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="y" side="LEFT" tickLabelRotation="56.3" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
