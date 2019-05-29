@@ -17,9 +17,11 @@ public class Principal {
 	 * 								IMPORTANTE
 	 * #####################################################################################
 	 * FALTA:
-	 * 		-> WEB SCRAPING
 	 * 		-> TERMINAR AS FUNCOES DE SIMILARIDADE
-	 * 		->INTERFACE GRAFIACA
+	 * 		-> FUNCOES DOS BUTOES DA INTERFACE GRAFIACA
+	 * 		-> POLIMORFISMO
+	 * 		-> INTERFACES
+	 * 		-> TRATAMENTO DE EXCEÇOES
 	 */
 	
 	public static void main(String[] args) {
