@@ -30,9 +30,12 @@ public class Principal {
 		BancoDeDados bd = new BancoDeDados();
 		ProcessarArquivo pc = new ProcessarArquivo(bd);
 		Site site = new Site();
+		Similaridade s = new Similaridade(bd);
+		ProcessarConteudo p = new ProcessarConteudo();
+		
 		Scanner entrada = new Scanner(System.in);
 		String EntradaTexto;
-		Similaridade s = new Similaridade(bd);
+		
 		ArrayList<String> mem = ar.Abrir("/Users/macosx/eclipse-workspace/ProjetoFinal/boatos.csv");
 		
 		pc.Processar(mem);
@@ -41,7 +44,6 @@ public class Principal {
 		EntradaTexto = entrada.nextLine();
 		String[] textoSite = site.processar(EntradaTexto);
 		
-		ProcessarConteudo p = new ProcessarConteudo();
 		
 		boolean validador = false;
 		
