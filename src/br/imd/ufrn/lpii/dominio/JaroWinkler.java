@@ -4,9 +4,13 @@ import java.util.Arrays;
 
 import br.imd.ufrn.lpii.app.Similaridade;
 
-public class JaroWinkler implements Similaridade {
+public class JaroWinkler extends Similaridade {
 
 	private static final double DEFAULT_SCALING_FACTOR = 0.1;
+
+	public JaroWinkler(BancoDeDados bd) {
+		super(bd);
+	}
 
 	@Override
 	public double distancia(String hash, String noticia) {

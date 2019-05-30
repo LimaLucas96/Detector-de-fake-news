@@ -2,7 +2,12 @@ package br.imd.ufrn.lpii.dominio;
 
 import br.imd.ufrn.lpii.app.Similaridade;
 
-public class Cosine implements Similaridade {
+public class Cosine extends Similaridade {
+
+	public Cosine(BancoDeDados bd) {
+		super(bd);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public double distancia(String hash, String noticia) {

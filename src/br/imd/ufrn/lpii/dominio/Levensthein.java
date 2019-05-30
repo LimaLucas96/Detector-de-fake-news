@@ -2,9 +2,13 @@ package br.imd.ufrn.lpii.dominio;
 
 import br.imd.ufrn.lpii.app.Similaridade;
 
-public class Levensthein implements Similaridade {
+public class Levensthein extends Similaridade {
 
-	@Override
+	public Levensthein(BancoDeDados bd) {
+		super(bd);
+		// TODO Auto-generated constructor stub
+	}
+
 	public double distancia(String hash, String noticia) {
 		
 		int tam = 0;
