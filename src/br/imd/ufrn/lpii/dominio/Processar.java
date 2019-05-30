@@ -47,6 +47,20 @@ public class Processar {
 		return mensagemProcessada;
 	}
 	
+	public String criarHash(String mensagem) {
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			md.update(mensagem.getBytes());
+			return toHexFormat(md.digest());
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	private void separar(String texto) {
 		String[] aux = texto.split(",");
 		int tam = aux.length;
@@ -108,23 +122,8 @@ public class Processar {
 		}
 	}
 	
-	private String ordenar() {
+	private void ordenar() {
 		Collections.sort(listaDePalavras);
-		return null;
-	}
-	
-	public String criarHash(String mensagem) {
-		
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			md.update(mensagem.getBytes());
-			return toHexFormat(md.digest());
-			
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 	
 	private String toHexFormat(final byte[] bytes) {
