@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import br.imd.ufrn.lpii.dominio.Arquivo;
 import br.imd.ufrn.lpii.dominio.BancoDeDados;
+import br.imd.ufrn.lpii.dominio.Cosine;
 import br.imd.ufrn.lpii.dominio.ProcessarArquivo;
 import br.imd.ufrn.lpii.dominio.ProcessarConteudo;
 import br.imd.ufrn.lpii.dominio.Similaridade;
@@ -12,6 +13,12 @@ import br.imd.ufrn.lpii.dominio.Site;
 
 public class Principal {
 	
+	private static Arquivo ar;
+	private static BancoDeDados bd;
+	private static Site site;
+	private static ProcessarArquivo pc;
+	private static Similaridade s;
+	private static ProcessarConteudo p;
 	/*
 	 * #####################################################################################
 	 * 								IMPORTANTE
@@ -26,12 +33,7 @@ public class Principal {
 	
 	public static void main(String[] args) {
 		
-		Arquivo ar = new Arquivo();
-		BancoDeDados bd = new BancoDeDados();
-		ProcessarArquivo pc = new ProcessarArquivo(bd);
-		Site site = new Site();
-		Similaridade s = new Similaridade(bd);
-		ProcessarConteudo p = new ProcessarConteudo();
+		builder();
 		
 		Scanner entrada = new Scanner(System.in);
 		String EntradaTexto;
@@ -113,4 +115,12 @@ public class Principal {
 //		System.out.println(p.criarHash(mensagem));
 	}
 
+	private static void builder() {
+		ar = new Arquivo();
+		bd = new BancoDeDados();
+		pc = new ProcessarArquivo(bd);
+		site = new Site();
+		s = new Similaridade(bd);
+		p = new ProcessarConteudo();
+	}
 }
