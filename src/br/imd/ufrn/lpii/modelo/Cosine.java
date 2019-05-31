@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 import br.imd.ufrn.lpii.app.Similaridade;
 
@@ -12,18 +12,30 @@ public class Cosine extends Similaridade {
 	@Override
 	public double distancia(String hash, String noticia) {
 		return (produtoEscalar(hash, noticia) / (Math.sqrt(produtoEscalar(hash, hash))*
-				Math.sqrt(produtoEscalar(noticia, noticia))))*100;
+				Math.sqrt(produtoEscalar(noticia, noticia)))*100);
 	}
 	
 	private int produtoEscalar(String a, String b) {
 		
+		int max = 0;
+		
+		if(a.length() > b.length()) {
+			max = a.length();
+		}else {
+			max = b.length();
+		}
+		
 		int produto = 0;
 		
-		for(int i = 0; i < b.length(); i ++) {
+		for(int i = 0; i < max; i ++) {
 			//produto += Integer.parseInt(String.valueOf(a.charAt(i)),16) * Integer.parseInt(String.valueOf (b.charAt(i)) ,16);
-			produto += a.charAt(i) * b.charAt(i);
+			if(i < a.length() && i < b.length() ) {
+				produto += a.charAt(i) * b.charAt(i);
+			}
+			
+			
 		}
-		System.out.println("O produto escalar é -------> "+produto);
+		
 		return produto;	
 	}
 }

@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 public class MensagemProcessada extends Registro {
 	

@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,11 +8,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class Site {
-	
-	public String[] processar(String url) {
+public class Site implements Externos{
+
+	@Override
+	public ArrayList<String> Abrir(String url) {
+		
 		ArrayList<String> paragrafos = new ArrayList<String>();
+		
 		Document doc;
+		
 		try {
 			doc = Jsoup.connect(url).get();
 			
@@ -33,12 +37,7 @@ public class Site {
 			e.printStackTrace();
 		}
 		
-		String[] temp = new String[paragrafos.size()];
-		
-		for(int i = 0; i < temp.length;i++) {
-			temp[i] = paragrafos.get(i);
-		}
-		
-		return temp;
+		return paragrafos;
 	}
+
 }

@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 import java.util.HashMap;
 import java.util.Set;

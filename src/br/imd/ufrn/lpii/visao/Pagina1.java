@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.javaFX;
+package br.imd.ufrn.lpii.visao;
 
 import java.awt.Desktop.Action;
 import java.io.File;

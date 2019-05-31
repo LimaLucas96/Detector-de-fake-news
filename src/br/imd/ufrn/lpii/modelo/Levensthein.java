@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 import br.imd.ufrn.lpii.app.Similaridade;
 

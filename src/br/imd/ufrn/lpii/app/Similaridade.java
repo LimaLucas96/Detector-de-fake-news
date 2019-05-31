@@ -1,6 +1,6 @@
 package br.imd.ufrn.lpii.app;
 
-import br.imd.ufrn.lpii.dominio.BancoDeDados;
+import br.imd.ufrn.lpii.modelo.BancoDeDados;
 
 public abstract class Similaridade {
 	
@@ -13,12 +13,13 @@ public abstract class Similaridade {
 		if(bd.buscaBancoDeDados(noticia)) {
 			return true;
 		}else {
-			//System.out.println("pasou aqui");
+			
 			for (String hash : bd.keySet()) {
 				
 				double porcentagem = distancia(bd.bdValor(hash).getMensagemProcessada(), noticia);
-				
+				System.out.println(porcentagem);
 				if( porcentagem >= 85) {
+					System.out.println(bd.bdValor(hash).getConteudo());
 					System.out.println("com "+porcentagem+"%");
 					return true;
 				}

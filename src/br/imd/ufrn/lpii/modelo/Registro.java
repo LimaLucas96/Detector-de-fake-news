@@ -1,6 +1,6 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
-public abstract class Registro {
+public class Registro {
 	
 	protected String id;
 	protected String conteudo;
@@ -33,8 +33,8 @@ public abstract class Registro {
 		this.timestamp = timestamp;
 	}
 	
-	public abstract void setMensagemProcessada(String mensagemProcessada);
+	public void setMensagemProcessada(String mensagemProcessada) { }
 	
-	public abstract String getMensagemProcessada();
+	public String getMensagemProcessada() { return null; }
 	
 }

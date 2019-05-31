@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -6,13 +6,22 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ProcessarConteudo {
+public class Processar {
+	private BancoDeDados bd;
 	private ArrayList<String> listaDePalavras;
 	
-	public ProcessarConteudo() {
+	public Processar(BancoDeDados bd) {
+		this.bd = bd;
 		listaDePalavras = new ArrayList<String>();
 	}
-	public String Processar(String mensagem) {
+	
+	public void processarArquivo(ArrayList<String> texto) {
+		for(int i = 1; i < texto.size();i++) {
+			separar(texto.get(i));
+		}
+	}
+	
+	public String ProcessarConteudo(String mensagem) {
 		
 		listaDePalavras.clear();
 		
@@ -34,9 +43,46 @@ public class ProcessarConteudo {
 			mensagemProcessada = mensagemProcessada.concat(" "+listaDePalavras.get(i));
 		}
 		
-		//System.out.println(mensagemProcessada);
 		
 		return mensagemProcessada;
+	}
+	
+	public String criarHash(String mensagem) {
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			md.update(mensagem.getBytes());
+			return toHexFormat(md.digest());
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private void separar(String texto) {
+		String[] aux = texto.split(",");
+		int tam = aux.length;
+		String ajuda = "";
+		
+		//System.out.println("###################################");
+		Registro r = new MensagemProcessada();
+		
+		r.setId(aux[0]);
+		r.setLink(aux[tam-2]);
+		r.setTimestamp(aux[tam-1]);
+		
+		for(int i = 1; i < tam -2;i++) {
+			ajuda = ajuda.concat(aux[i] + " ");
+		}
+		
+		r.setConteudo(ajuda);
+		
+		r.setMensagemProcessada(ProcessarConteudo(r.getConteudo()));
+		//System.out.println(r.getMensagemProcessada());
+		//System.out.println(c.criarHash(r.getMensagemProcessada()));
+		bd.Adicionar(criarHash(r.getMensagemProcessada()), r);		
 	}
 	
 	private void removerPalavras() {
@@ -76,23 +122,8 @@ public class ProcessarConteudo {
 		}
 	}
 	
-	private String ordenar() {
+	private void ordenar() {
 		Collections.sort(listaDePalavras);
-		return null;
-	}
-	
-	public String criarHash(String mensagem) {
-		
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			md.update(mensagem.getBytes());
-			return toHexFormat(md.digest());
-			
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 	
 	private String toHexFormat(final byte[] bytes) {

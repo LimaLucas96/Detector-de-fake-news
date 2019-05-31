@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.dominio;
+package br.imd.ufrn.lpii.modelo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,12 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Arquivo {
+public class Arquivo implements Externos {
 	
 	private File arquivo;
 	
+	@Override
 	public ArrayList<String> Abrir(String url) {
-		
 		arquivo = new File(url);
 		
 		ArrayList<String> texto = new ArrayList<String>();
@@ -39,4 +39,5 @@ public class Arquivo {
 		
 		return texto;
 	}
+
 }

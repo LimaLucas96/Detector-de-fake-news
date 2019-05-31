@@ -3,19 +3,20 @@ package br.imd.ufrn.lpii.app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import br.imd.ufrn.lpii.dominio.BancoDeDados;
-import br.imd.ufrn.lpii.dominio.Externos;
-import br.imd.ufrn.lpii.dominio.Processar;
-import br.imd.ufrn.lpii.dominio.Similaridade;
-import br.imd.ufrn.lpii.temp.Arquivo;
-import br.imd.ufrn.lpii.temp.Site;
+import br.imd.ufrn.lpii.modelo.Arquivo;
+import br.imd.ufrn.lpii.modelo.BancoDeDados;
+import br.imd.ufrn.lpii.modelo.Cosine;
+import br.imd.ufrn.lpii.modelo.Externos;
+import br.imd.ufrn.lpii.modelo.Levensthein;
+import br.imd.ufrn.lpii.modelo.Processar;
+import br.imd.ufrn.lpii.modelo.Site;
 
 public class Principal {
 	
 	private static Externos arquivo;
 	private static BancoDeDados bd;
 	private static Externos site;
-	private static Similaridade s;
+	private static Similaridade similaridade;
 	private static Processar processar;
 	/*
 	 * #####################################################################################
@@ -58,7 +59,7 @@ public class Principal {
 				System.out.print("Processando.....[100%]\r");
 				
 				break;
-			}else if(s.verificarSimilaridade(hash)) {
+			}else if(similaridade.verificarSimilaridade(hash)) {
 				validador = true;	
 				System.out.print("Processando.....[100%]\r");
 				
@@ -78,9 +79,7 @@ public class Principal {
 		arquivo = new Arquivo();
 		bd = new BancoDeDados();
 		processar = new Processar(bd);
-		//pc = new ProcessarArquivo(bd);
 		site = new Site();
-		s = new Similaridade(bd);
-		//p = new ProcessarConteudo();
+		similaridade = new Cosine(bd);
 	}
 }
