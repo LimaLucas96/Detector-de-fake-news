@@ -144,6 +144,7 @@ public class Pagina1{
 	    		serie2.setName("Levens");
 	    		serie2.getData().add(new XYChart.Data("",40));
 	    		graficoLinha.getData().add(serie2);
+	    		
 	    	}
 	    	if(checkBoxTrigram.isSelected()) {
 	    		XYChart.Series serie3 = new XYChart.Series();

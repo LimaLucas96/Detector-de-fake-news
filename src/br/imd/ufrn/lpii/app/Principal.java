@@ -7,6 +7,7 @@ import br.imd.ufrn.lpii.modelo.Arquivo;
 import br.imd.ufrn.lpii.modelo.BancoDeDados;
 import br.imd.ufrn.lpii.modelo.Cosine;
 import br.imd.ufrn.lpii.modelo.Externos;
+import br.imd.ufrn.lpii.modelo.JaroWinkler;
 import br.imd.ufrn.lpii.modelo.Levensthein;
 import br.imd.ufrn.lpii.modelo.Processar;
 import br.imd.ufrn.lpii.modelo.Site;
@@ -40,7 +41,8 @@ public class Principal {
 		ArrayList<String> mem = arquivo.Abrir("/Users/macosx/eclipse-workspace/ProjetoFinal/boatos.csv");
 		
 		processar.processarArquivo(mem);
-		
+		//bd.print();
+		//System.out.println(similaridade.distancia("ABC", "ABCE"));
 		System.out.println("Digite o link do site da fake news:");
 		
 		EntradaTexto = entrada.nextLine();
@@ -60,7 +62,8 @@ public class Principal {
 				
 				break;
 			}else if(similaridade.verificarSimilaridade(hash)) {
-				validador = true;	
+				validador = true;
+				System.out.println(hash);
 				System.out.print("Processando.....[100%]\r");
 				
 				break;
@@ -80,6 +83,6 @@ public class Principal {
 		bd = new BancoDeDados();
 		processar = new Processar(bd);
 		site = new Site();
-		similaridade = new Cosine(bd);
+		similaridade = new Levensthein(bd);
 	}
 }

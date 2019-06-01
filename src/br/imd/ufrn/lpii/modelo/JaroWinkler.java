@@ -30,7 +30,7 @@ public class JaroWinkler extends Similaridade {
 			jw = j + Math.min(DEFAULT_SCALING_FACTOR, 1 / mTemp[3]) * mTemp[2] * (1 - j);
 		}
 		
-		return jw;
+		return jw * 100;
 	}
 	
 	private int[] matches(String hash, String noticia) {
