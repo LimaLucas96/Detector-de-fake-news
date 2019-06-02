@@ -21,7 +21,6 @@ public class Principal {
 	 * 		-> FUNCOES DOS BUTOES DA INTERFACE GRAFIACA
 	 * 		-> POLIMORFISMO
 	 * 		-> INTERFACES
-	 * 		-> TRATAMENTO DE EXCEÇOES
 	 */
 	
 	public static void main(String[] args) {
