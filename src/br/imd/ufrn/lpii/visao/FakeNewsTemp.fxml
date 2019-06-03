@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -234,7 +234,7 @@
                </children>
             </VBox>
             <FontAwesomeIconView fill="GREY" glyphName="FOLDER" layoutX="180.0" layoutY="66.0" size="40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="31.71428680419922" />
-            <TextField layoutX="240.0" layoutY="28.0" prefHeight="50.0" prefWidth="780.0" promptText="C:/" style="-fx-background-color: #212F3D; -fx-background-radius: 15 0 0 15;" stylesheets="@temp.css" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="28.0" />
+            <TextField layoutX="240.0" layoutY="28.0" prefHeight="50.0" prefWidth="780.0" promptText="C:/" style="-fx-background-color: #212F3D; -fx-background-radius: 15 0 0 15;" stylesheets="@../css/temp.css" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="28.0" />
             <AnchorPane layoutX="1020.0" layoutY="28.0" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #212F3D; -fx-background-radius: 0 15 15 0;" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="28.0">
                <children>
                   <FontAwesomeIconView fill="GREY" glyphName="SEARCH" layoutX="26.0" layoutY="35.0" size="30" />
