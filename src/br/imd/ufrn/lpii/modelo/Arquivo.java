@@ -12,30 +12,21 @@ public class Arquivo implements Externos {
 	private File arquivo;
 	
 	@Override
-	public ArrayList<String> Abrir(String url) {
+	public ArrayList<String> Abrir(String url) throws Exception {
 		arquivo = new File(url);
 		
 		ArrayList<String> texto = new ArrayList<String>();
-		
-		try {
-			FileReader fr = new FileReader(arquivo);
+	
+		FileReader fr = new FileReader(arquivo);
 			
-			BufferedReader br = new BufferedReader(fr);
+		BufferedReader br = new BufferedReader(fr);
 			
-			while(br.ready()) {
-				texto.add(br.readLine());
-			}
-			
-			br.close();
-			fr.close();
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while(br.ready()) {
+			texto.add(br.readLine());
 		}
+		
+		br.close();
+		fr.close();	
 		
 		return texto;
 	}

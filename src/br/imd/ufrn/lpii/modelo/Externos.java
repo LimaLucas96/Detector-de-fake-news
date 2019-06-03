@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface Externos {
 	
-	public ArrayList<String> Abrir(String url);
+	public ArrayList<String> Abrir(String url) throws Exception;
 }

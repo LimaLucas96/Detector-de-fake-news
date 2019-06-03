@@ -11,31 +11,26 @@ import org.jsoup.select.Elements;
 public class Site implements Externos{
 
 	@Override
-	public ArrayList<String> Abrir(String url) {
+	public ArrayList<String> Abrir(String url) throws Exception {
 		
 		ArrayList<String> paragrafos = new ArrayList<String>();
 		
 		Document doc;
 		
-		try {
-			doc = Jsoup.connect(url).get();
+		doc = Jsoup.connect(url).get();
 			
 			
 		
-			Elements element = doc.select("p");
+		Elements element = doc.select("p");
 			
-			for (Element step : element) {
-				String temp = step.text();
-			
-				if(temp.length() > 200) {
-					paragrafos.add(temp);
-				}
+		for (Element step : element) {
+			String temp = step.text();
+		
+			if(temp.length() > 200) {
+				paragrafos.add(temp);
 			}
-				
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+				
 		
 		return paragrafos;
 	}

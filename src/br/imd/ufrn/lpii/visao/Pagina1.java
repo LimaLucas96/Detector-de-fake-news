@@ -3,8 +3,16 @@ package br.imd.ufrn.lpii.visao;
 import java.awt.Desktop.Action;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import br.imd.ufrn.lpii.app.Similaridade;
+import br.imd.ufrn.lpii.modelo.Arquivo;
+import br.imd.ufrn.lpii.modelo.BancoDeDados;
+import br.imd.ufrn.lpii.modelo.Externos;
+import br.imd.ufrn.lpii.modelo.Levensthein;
+import br.imd.ufrn.lpii.modelo.Processar;
+import br.imd.ufrn.lpii.modelo.Site;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -49,11 +57,11 @@ public class Pagina1{
 		@FXML
 	    private ResourceBundle resources;
 	    @FXML
-	    private Label texto; 
+	    private Label mensagemError; 
 	    @FXML
 	    private URL location;
 	    @FXML
-	    private TextField Mensagem;
+	    private TextField buscaBar;
 	    
 	    @FXML
 	    private BarChart<?, ?> graficoLinha;
@@ -63,27 +71,34 @@ public class Pagina1{
 
 	    @FXML
 	    private NumberAxis y;
-	   
+	    
+	    private static Externos arquivo;
+		private static BancoDeDados bd;
+		private static Externos site;
+		private static Similaridade similaridade;
+		private static Processar processar;
 	    
 	    @FXML
 	    void buscarData(ActionEvent event) {
 	    	
-	    	FileChooser fileChoose = new FileChooser();
-	    	
-	    	FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-	    	
-	    	File diretorioIicial = new File("/Users/macosx/eclipse-workspace/ProjetoFinal/");
-	    	
-	    	fileChoose.getExtensionFilters().add(filter);
+	    	mensagemError.setText("");
 	    	
 	    	System.out.println("clicou");
-	    	fileChoose.setTitle("Data Set");
-	    	fileChoose.setInitialDirectory(diretorioIicial);
-	    	Stage stage = (Stage)Arco.getScene().getWindow();
 	    	
-	    	Mensagem.setText(fileChoose.showOpenDialog(stage).toString());
+	    	String url = procurarDados();
+	    	buscaBar.setText(url);
 	    	
-	    	if(!Mensagem.getText().isEmpty()) {
+	    	try {
+	    		ArrayList<String> dadosArquivo = arquivo.Abrir(url);
+	    		processar.processarArquivo(dadosArquivo);
+				
+			} catch (Exception e) {
+				
+				mensagemError.setText(e.getMessage());
+				
+			}
+	    	
+	    	if(!buscaBar.getText().isEmpty()) {
 	    		botaoProximo1.setDisable(false);
 	    	}
 	    	
@@ -162,7 +177,29 @@ public class Pagina1{
 	    }
 	    @FXML
 	    void initialize() {
-
+	    	arquivo = new Arquivo();
+			bd = new BancoDeDados();
+			processar = new Processar(bd);
+			site = new Site();
+			similaridade = new Levensthein(bd);
+	    }
+	    
+	    private String procurarDados() {
+	    	
+	    	FileChooser fileChoose = new FileChooser();
+	    	
+	    	FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+	    	
+	    	File diretorioIicial = new File("/Users/macosx/eclipse-workspace/ProjetoFinal/");
+	    	
+	    	fileChoose.getExtensionFilters().add(filter);
+	    	
+	    	fileChoose.setTitle("Data Set");
+	    	fileChoose.setInitialDirectory(diretorioIicial);
+	    	Stage stage = (Stage)Arco.getScene().getWindow();
+	    	
+	    	
+	    	return fileChoose.showOpenDialog(stage).toString();
 	    }
 
 }

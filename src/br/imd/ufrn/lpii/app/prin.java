@@ -12,7 +12,7 @@ public class prin extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Pane root = FXMLLoader.load(getClass().getResource("../javaFX/fakeNews.fxml"));
+		Pane root = FXMLLoader.load(getClass().getResource("../visao/fakeNews.fxml"));
 		
 		Scene scene = new Scene(root,600,205);
 		primaryStage.setTitle("FakeNews");

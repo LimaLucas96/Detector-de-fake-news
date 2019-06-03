@@ -6,16 +6,24 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import br.imd.ufrn.lpii.excepitions.FileException;
+
 public class Processar {
 	private BancoDeDados bd;
 	private ArrayList<String> listaDePalavras;
 	
+	private static final String CODIGO_ARQUIVO = ",hoax,link,timestamp";
 	public Processar(BancoDeDados bd) {
 		this.bd = bd;
 		listaDePalavras = new ArrayList<String>();
 	}
 	
-	public void processarArquivo(ArrayList<String> texto) {
+	public void processarArquivo(ArrayList<String> texto) throws FileException {
+		
+		if(!texto.get(0).equals(CODIGO_ARQUIVO)) {
+			throw new FileException("Arquivo errado!");
+		}
+		
 		for(int i = 1; i < texto.size();i++) {
 			separar(texto.get(i));
 		}

@@ -31,7 +31,7 @@ public class Principal {
 	 * 		-> TRATAMENTO DE EXCEÇOES
 	 */
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		builder();
 		
@@ -50,6 +50,7 @@ public class Principal {
 		
 		boolean validador = false;
 		
+		System.out.println("\n############ Levens #############\n");
 		for(int i = 0; i < textoSite.size(); i++) {
 			
 			System.out.print("Processando.....["+((i*100)/textoSite.size())+"%]\r");
@@ -63,7 +64,6 @@ public class Principal {
 				break;
 			}else if(similaridade.verificarSimilaridade(hash)) {
 				validador = true;
-				System.out.println(hash);
 				System.out.print("Processando.....[100%]\r");
 				
 				break;
@@ -76,6 +76,63 @@ public class Principal {
 			System.out.println("Nao é uma fake News");
 		}
 		
+		//------------------------------------------------------
+		
+		System.out.println("\n############ Cosine #############\n");
+		similaridade = new Cosine(bd);
+		for(int i = 0; i < textoSite.size(); i++) {
+			
+			System.out.print("Processando.....["+((i*100)/textoSite.size())+"%]\r");
+			
+			String hash = processar.ProcessarConteudo(textoSite.get(i));
+			
+			if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
+				validador = true;
+				System.out.print("Processando.....[100%]\r");
+				
+				break;
+			}else if(similaridade.verificarSimilaridade(hash)) {
+				validador = true;
+				System.out.print("Processando.....[100%]\r");
+				
+				break;
+			}
+		}
+		
+		if(validador) {
+			System.out.println("É uma fake News");
+		}else {
+			System.out.println("Nao é uma fake News");
+		}
+		
+		//------------------------------------------------------
+		
+				System.out.println("\n############ Jaro-Winkler #############\n");
+				similaridade = new JaroWinkler(bd);
+				for(int i = 0; i < textoSite.size(); i++) {
+					
+					System.out.print("Processando.....["+((i*100)/textoSite.size())+"%]\r");
+					
+					String hash = processar.ProcessarConteudo(textoSite.get(i));
+					
+					if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
+						validador = true;
+						System.out.print("Processando.....[100%]\r");
+						
+						break;
+					}else if(similaridade.verificarSimilaridade(hash)) {
+						validador = true;
+						System.out.print("Processando.....[100%]\r");
+						
+						break;
+					}
+				}
+				
+				if(validador) {
+					System.out.println("É uma fake News");
+				}else {
+					System.out.println("Nao é uma fake News");
+				}
 	}
 
 	private static void builder() {

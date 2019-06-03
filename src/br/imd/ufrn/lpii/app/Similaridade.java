@@ -20,7 +20,7 @@ public abstract class Similaridade {
 				//System.out.println(porcentagem);
 				if( porcentagem >= 85) {
 					
-					System.out.println("-->" + bd.bdValor(hash).getMensagemProcessada());
+					//System.out.println("-->" + bd.bdValor(hash).getMensagemProcessada());
 					System.out.println("com "+porcentagem+"%");
 					
 					return true;
