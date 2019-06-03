@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #17202A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="telaGeral" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #17202A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.imd.ufrn.lpii.controller.PaginaController">
    <children>
       <AnchorPane prefHeight="69.0" prefWidth="1142.0" style="-fx-background-color: #212F3D;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,7 +34,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
+      <AnchorPane fx:id="telaPrincial" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
          <children>
             <AnchorPane prefHeight="613.0" prefWidth="158.0" style="-fx-background-color: #212F3D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -59,7 +59,7 @@
                      </font>
                   </CheckBox>
                   <Slider layoutX="10.0" layoutY="256.0" min="85.0" prefHeight="14.0" prefWidth="100.0" value="85.0" />
-                  <TextField layoutX="110.0" layoutY="250.0" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #17202A;" text="85" />
+                  <TextField layoutX="110.0" layoutY="250.0" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #17202A;" stylesheets="@../css/temp.css" text="85" />
                   <Separator layoutY="236.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="236.0" />
                </children>
             </AnchorPane>
@@ -67,7 +67,7 @@
                <children>
                   <HBox prefHeight="37.0" prefWidth="984.0">
                      <children>
-                        <TextField prefHeight="35.0" prefWidth="809.0" promptText="https://" style="-fx-background-color: #212F3D; -fx-background-radius: 5 0 0 5;" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="barraUrlSite" prefHeight="35.0" prefWidth="809.0" promptText="https://" style="-fx-background-color: #212F3D; -fx-background-radius: 5 0 0 5;" stylesheets="@../css/temp.css" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -75,7 +75,7 @@
                               <Insets left="20.0" top="20.0" />
                            </HBox.margin>
                         </TextField>
-                        <AnchorPane prefHeight="30.0" prefWidth="49.0" style="-fx-background-color: #212F3D; -fx-background-radius: 0 5 5 0;">
+                        <AnchorPane onMouseClicked="#verificaSite" prefHeight="30.0" prefWidth="49.0" style="-fx-background-color: #212F3D; -fx-background-radius: 0 5 5 0;">
                            <HBox.margin>
                               <Insets right="20.0" top="20.0" />
                            </HBox.margin>
@@ -91,7 +91,7 @@
                         </AnchorPane>
                      </children>
                   </HBox>
-                  <LineChart legendVisible="false" prefHeight="356.0" prefWidth="924.0" stylesheets="@temp.css" title="Similaridade" VBox.vgrow="ALWAYS">
+                  <LineChart legendVisible="false" prefHeight="356.0" prefWidth="924.0" stylesheets="@../css/temp.css" title="Similaridade" VBox.vgrow="ALWAYS">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -114,20 +114,17 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="100%" textFill="GREY">
+                              <Label text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
                               </Label>
-                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="1.0">
+                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="0.0">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
                                  </VBox.margin>
                               </ProgressBar>
                            </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
                            <HBox.margin>
                               <Insets bottom="10.0" />
                            </HBox.margin>
@@ -142,20 +139,17 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="100%" textFill="GREY">
+                              <Label text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
                               </Label>
-                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="1.0">
+                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="0.0">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
                                  </VBox.margin>
                               </ProgressBar>
                            </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
                            <HBox.margin>
                               <Insets bottom="10.0" />
                            </HBox.margin>
@@ -170,12 +164,12 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="100%" textFill="GREY">
+                              <Label text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
                               </Label>
-                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="1.0">
+                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="0.0">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
                                  </VBox.margin>
@@ -192,12 +186,12 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="90%" textFill="GREY">
+                              <Label text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
                               </Label>
-                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="0.9">
+                              <ProgressBar prefHeight="18.0" prefWidth="135.0" progress="0.0">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
                                  </VBox.margin>
@@ -213,7 +207,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="471.0" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
+      <AnchorPane fx:id="telaInicial" layoutX="471.0" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="613.0" prefWidth="158.0" style="-fx-background-color: #212F3D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -234,8 +228,8 @@
                </children>
             </VBox>
             <FontAwesomeIconView fill="GREY" glyphName="FOLDER" layoutX="180.0" layoutY="66.0" size="40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="31.71428680419922" />
-            <TextField layoutX="240.0" layoutY="28.0" prefHeight="50.0" prefWidth="780.0" promptText="C:/" style="-fx-background-color: #212F3D; -fx-background-radius: 15 0 0 15;" stylesheets="@../css/temp.css" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="28.0" />
-            <AnchorPane layoutX="1020.0" layoutY="28.0" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #212F3D; -fx-background-radius: 0 15 15 0;" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="28.0">
+            <TextField fx:id="barraBuscaData" layoutX="240.0" layoutY="28.0" onAction="#buscaData" prefHeight="50.0" prefWidth="780.0" promptText="C:/" style="-fx-background-color: #212F3D; -fx-background-radius: 15 0 0 15;" stylesheets="@../css/temp.css" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="28.0" />
+            <AnchorPane layoutX="1020.0" layoutY="28.0" onMouseClicked="#buscaData" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #212F3D; -fx-background-radius: 0 15 15 0;" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="28.0">
                <children>
                   <FontAwesomeIconView fill="GREY" glyphName="SEARCH" layoutX="26.0" layoutY="35.0" size="30" />
                </children>
@@ -243,26 +237,29 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="955.0" layoutY="518.0" prefHeight="63.0" prefWidth="130.0" style="-fx-background-color: #28B463; -fx-background-radius: 15;" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="57.0">
+            <AnchorPane fx:id="botaoAvancaTela" disable="true" layoutX="955.0" layoutY="518.0" onMouseClicked="#avancaPagina" prefHeight="63.0" prefWidth="130.0" style="-fx-background-color: #28B463; -fx-background-radius: 15;" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="57.0">
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" layoutX="44.0" layoutY="48.0" size="50" />
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane opacity="0.66" prefHeight="682.0" prefWidth="1142.0" style="-fx-background-color: #000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="telaCarregando" opacity="0.66" prefHeight="682.0" prefWidth="1142.0" style="-fx-background-color: #000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ProgressIndicator layoutX="417.0" layoutY="181.0" prefHeight="320.0" prefWidth="309.0" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="417.0" AnchorPane.rightAnchor="416.0" AnchorPane.topAnchor="181.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="123.0" opacity="0.68" prefHeight="109.0" prefWidth="271.0" style="-fx-background-color: red;" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
+      <AnchorPane fx:id="popUpError" layoutY="123.0" opacity="0.68" prefHeight="109.0" prefWidth="271.0" style="-fx-background-color: red; -fx-background-radius: 10 0 0 10;" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
          <children>
             <Label layoutX="166.0" layoutY="14.0" text="Error!" textFill="WHITE" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="46.0" prefHeight="63.0" prefWidth="219.0" text="errrorr" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
+            <Label fx:id="mensagemError" alignment="TOP_LEFT" layoutX="14.0" layoutY="46.0" prefHeight="63.0" prefWidth="219.0" text="errrorr" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -271,20 +268,15 @@
             <FontAwesomeIconView fill="WHITE" glyphName="EXCLAMATION_CIRCLE" layoutX="22.0" layoutY="37.0" size="40" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="133.0" opacity="0.68" prefHeight="109.0" prefWidth="271.0" style="-fx-background-color: #2471A3;" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
+      <AnchorPane fx:id="popUpResultado" layoutX="10.0" layoutY="133.0" opacity="0.68" prefHeight="109.0" prefWidth="271.0" style="-fx-background-color: #2471A3; -fx-background-radius: 10 0 0 10;" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
          <children>
-            <Label layoutX="166.0" layoutY="14.0" text="Error!" textFill="WHITE" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="14.0">
+            <Label alignment="CENTER" layoutX="66.0" layoutY="40.0" prefHeight="30.0" prefWidth="216.0" text="É uma fake News" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="46.0" prefHeight="63.0" prefWidth="219.0" text="errrorr" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
             <FontAwesomeIconView fill="WHITE" glyphName="TIMES" layoutX="249.0" layoutY="20.0" size="20" />
-            <FontAwesomeIconView fill="WHITE" glyphName="EXCLAMATION_CIRCLE" layoutX="22.0" layoutY="37.0" size="40" />
+            <FontAwesomeIconView fill="WHITE" glyphName="EXCLAMATION_CIRCLE" layoutX="14.0" layoutY="47.0" size="40" />
          </children>
       </AnchorPane>
    </children>
