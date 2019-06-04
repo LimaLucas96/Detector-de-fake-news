@@ -38,27 +38,27 @@
          <children>
             <AnchorPane prefHeight="613.0" prefWidth="158.0" style="-fx-background-color: #212F3D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <CheckBox layoutX="32.0" layoutY="45.0" mnemonicParsing="false" text="Cosine" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="45.0">
+                  <CheckBox fx:id="checkBoxCosine" layoutX="32.0" layoutY="45.0" mnemonicParsing="false" text="Cosine" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="45.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="32.0" layoutY="75.0" mnemonicParsing="false" text="Levens" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="75.0">
+                  <CheckBox fx:id="checkBoxLevens" layoutX="32.0" layoutY="75.0" mnemonicParsing="false" text="Levens" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="75.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="32.0" layoutY="105.0" mnemonicParsing="false" text="Trigram" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="105.0">
+                  <CheckBox fx:id="checkBoxTrigram" layoutX="32.0" layoutY="105.0" mnemonicParsing="false" text="Trigram" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="105.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="32.0" layoutY="135.0" mnemonicParsing="false" text="Jaro-Winkler" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="135.0">
+                  <CheckBox fx:id="checkBoxJaro" layoutX="32.0" layoutY="135.0" mnemonicParsing="false" text="Jaro-Winkler" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="135.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <Slider layoutX="10.0" layoutY="256.0" min="85.0" prefHeight="14.0" prefWidth="100.0" value="85.0" />
+                  <Slider fx:id="sliderSimiliaridade" layoutX="10.0" layoutY="256.0" min="85.0" prefHeight="14.0" prefWidth="100.0" value="85.0" />
                   <TextField layoutX="110.0" layoutY="250.0" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #17202A;" stylesheets="@../css/temp.css" text="85" />
                   <Separator layoutY="236.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="236.0" />
                </children>
@@ -114,7 +114,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="0%" textFill="GREY">
+                              <Label fx:id="porcentCos" text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
@@ -139,7 +139,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="0%" textFill="GREY">
+                              <Label fx:id="porcentLev" text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
@@ -250,6 +250,11 @@
       <AnchorPane fx:id="telaCarregando" opacity="0.66" prefHeight="682.0" prefWidth="1142.0" style="-fx-background-color: #000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ProgressIndicator layoutX="417.0" layoutY="181.0" prefHeight="320.0" prefWidth="309.0" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="417.0" AnchorPane.rightAnchor="416.0" AnchorPane.topAnchor="181.0" />
+            <Label alignment="CENTER" layoutX="238.0" layoutY="514.0" text="Processando ..." textFill="WHITE" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font name="Arial" size="96.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="popUpError" layoutY="123.0" opacity="0.68" prefHeight="109.0" prefWidth="271.0" style="-fx-background-color: red; -fx-background-radius: 10 0 0 10;" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
@@ -259,7 +264,7 @@
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="mensagemError" alignment="TOP_LEFT" layoutX="14.0" layoutY="46.0" prefHeight="63.0" prefWidth="219.0" text="errrorr" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
+            <Label fx:id="mensagemError" alignment="TOP_LEFT" layoutX="14.0" layoutY="46.0" prefHeight="63.0" prefWidth="219.0" text="errrorr" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="16.0" />
                </font>

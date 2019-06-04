@@ -8,6 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import br.imd.ufrn.lpii.modelo.abstratics.Externos;
+
 public class Site implements Externos{
 
 	@Override

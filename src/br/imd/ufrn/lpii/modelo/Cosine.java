@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import br.imd.ufrn.lpii.app.Similaridade;
+import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 
 public class Cosine extends Similaridade {
 	

@@ -6,13 +6,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import br.imd.ufrn.lpii.app.Similaridade;
 import br.imd.ufrn.lpii.modelo.Arquivo;
 import br.imd.ufrn.lpii.modelo.BancoDeDados;
-import br.imd.ufrn.lpii.modelo.Externos;
 import br.imd.ufrn.lpii.modelo.Levensthein;
 import br.imd.ufrn.lpii.modelo.Processar;
 import br.imd.ufrn.lpii.modelo.Site;
+import br.imd.ufrn.lpii.modelo.abstratics.Externos;
+import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;

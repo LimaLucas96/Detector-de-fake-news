@@ -6,11 +6,12 @@ import java.util.Scanner;
 import br.imd.ufrn.lpii.modelo.Arquivo;
 import br.imd.ufrn.lpii.modelo.BancoDeDados;
 import br.imd.ufrn.lpii.modelo.Cosine;
-import br.imd.ufrn.lpii.modelo.Externos;
 import br.imd.ufrn.lpii.modelo.JaroWinkler;
 import br.imd.ufrn.lpii.modelo.Levensthein;
 import br.imd.ufrn.lpii.modelo.Processar;
 import br.imd.ufrn.lpii.modelo.Site;
+import br.imd.ufrn.lpii.modelo.abstratics.Externos;
+import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 
 public class Principal {
 	

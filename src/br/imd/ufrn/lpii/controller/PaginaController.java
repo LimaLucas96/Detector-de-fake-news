@@ -3,18 +3,20 @@ package br.imd.ufrn.lpii.controller;
 import java.io.File;
 import java.util.ArrayList;
 
-import br.imd.ufrn.lpii.app.Similaridade;
 import br.imd.ufrn.lpii.modelo.Arquivo;
 import br.imd.ufrn.lpii.modelo.BancoDeDados;
-import br.imd.ufrn.lpii.modelo.Externos;
+import br.imd.ufrn.lpii.modelo.Cosine;
 import br.imd.ufrn.lpii.modelo.Levensthein;
 import br.imd.ufrn.lpii.modelo.Processar;
 import br.imd.ufrn.lpii.modelo.Site;
-import javafx.application.Platform;
+import br.imd.ufrn.lpii.modelo.abstratics.Externos;
+import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,8 +28,11 @@ public class PaginaController {
 	private static Externos arquivo;
 	private static BancoDeDados bd;
 	private static Externos site;
-	private static Similaridade similaridade;
 	private static Processar processar;
+	ArrayList<String> textoSite;
+	
+	private int maxPorcentCos;
+	private int maxPorcentLev;
 	
 	@FXML
     private AnchorPane telaPrincial;
@@ -61,7 +66,28 @@ public class PaginaController {
     
     @FXML
     private Label mensagemPopUpResultado;
+    
+    @FXML
+    private CheckBox checkBoxCosine;
 
+    @FXML
+    private CheckBox checkBoxLevens;
+
+    @FXML
+    private CheckBox checkBoxTrigram;
+
+    @FXML
+    private CheckBox checkBoxJaro;
+    
+    @FXML
+    private Label porcentCos;
+
+    @FXML
+    private Label porcentLev;
+    
+    @FXML
+    private Slider sliderSimiliaridade;
+    
     @FXML
     void initialize() {
     	telaInicial.setVisible(true);
@@ -70,7 +96,6 @@ public class PaginaController {
 		bd = new BancoDeDados();
 		processar = new Processar(bd);
 		site = new Site();
-		similaridade = new Levensthein(bd);
     }
     
     @FXML
@@ -106,17 +131,38 @@ public class PaginaController {
 
     @FXML
     void verificaSite(MouseEvent event) {
-    	telaCarregando.setVisible(true);
+    	maxPorcentCos = 0;
+    	maxPorcentLev = 0;
+    	if(!checkBoxCosine.isSelected() && !checkBoxLevens.isSelected()) {
+    		popUpError.setVisible(true);
+			mensagemError.setText( "Nenhum algoritmo selecionado");
+			return;
+		}
     	
+    	telaCarregando.setVisible(true);
+    	 
     	Service<Boolean> process = new Service<Boolean>(){
-
 			@Override
 			protected Task<Boolean> createTask() {
 				return new Task<Boolean>() {
-
 					@Override
 					protected Boolean call() throws Exception {
-						return checar();
+						boolean result = false;
+						
+						textoSite = site.Abrir(barraUrlSite.getText());
+						
+						if(checkBoxLevens.isSelected()) {
+							boolean temp = checarLevens();
+							
+							if(!result) { result = temp; }
+							
+						}if(checkBoxCosine.isSelected()) {
+							boolean temp = checarCosine();
+							
+							if(!result) { result = temp; }
+							
+						}
+						return result;
 					}
 				};
 			}
@@ -135,6 +181,8 @@ public class PaginaController {
     			popUpResultado.setVisible(true);
     		}
     		
+    		porcentCos.setText(maxPorcentCos + "%");
+    		porcentLev.setText(maxPorcentLev + "%");
     	});
     	
     	process.setOnFailed(e -> {
@@ -143,7 +191,6 @@ public class PaginaController {
 			mensagemError.setText( process.getException().getMessage() );
 			
     	});
-    	
     	process.start();
     }
     
@@ -171,11 +218,40 @@ public class PaginaController {
     	return fileChoose.showOpenDialog(stage).toString();
     }
 
-    private boolean checar() throws Exception {
-
+    private boolean checarLevens() throws Exception {
+    	Similaridade similaridade = new Levensthein(bd);
+    	
     	System.out.println(barraUrlSite.getText());
-    	ArrayList<String> textoSite = site.Abrir(barraUrlSite.getText());
-			 
+    	
+    	boolean validador = false;
+    	for(int i = 0; i < textoSite.size(); i++) {
+			
+    		String hash = processar.ProcessarConteudo(textoSite.get(i));
+    			
+    		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
+    			validador = true;
+    			maxPorcentLev = 100;	
+    			break;
+    		}else {
+    			int temp = (int) similaridade.verificarSimilaridade(hash);
+    			
+    			if(temp > maxPorcentCos) {
+    				maxPorcentLev = temp;
+    			}
+    			if( temp >= sliderSimiliaridade.getValue()) {
+    				validador = true;
+    				break;
+    			}
+    		}
+    	}
+    	return validador;
+    }
+    
+    private boolean checarCosine() throws Exception {
+    	Similaridade similaridade = new Cosine(bd);
+    	
+    	System.out.println(barraUrlSite.getText());
+    	
     	boolean validador = false;
     	for(int i = 0; i < textoSite.size(); i++) {
     			
@@ -183,14 +259,21 @@ public class PaginaController {
     			
     		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
     			validador = true;
-    				
+    			maxPorcentCos = 100;	
     			break;
-    		}else if(similaridade.verificarSimilaridade(hash)) {
-    			validador = true;
-    				
-    			break;
+    		}else {
+    			int temp = (int) similaridade.verificarSimilaridade(hash);
+    			
+    			if(temp > maxPorcentCos) {
+    				maxPorcentCos = temp;
+    			}
+    			if( temp >= sliderSimiliaridade.getValue()) {
+    				validador = true;
+    				break;
+    			}
     		}
     	}
+    	
     	return validador;
     }
 }

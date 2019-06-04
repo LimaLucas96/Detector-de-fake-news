@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import br.imd.ufrn.lpii.modelo.abstratics.Externos;
+
 public class Arquivo implements Externos {
 	
 	private File arquivo;
