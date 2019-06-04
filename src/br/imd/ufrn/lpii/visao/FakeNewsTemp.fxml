@@ -34,7 +34,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="telaPrincial" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
+      <AnchorPane fx:id="telaPrincial" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
          <children>
             <AnchorPane prefHeight="613.0" prefWidth="158.0" style="-fx-background-color: #212F3D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -207,7 +207,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="telaInicial" layoutX="471.0" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
+      <AnchorPane fx:id="telaInicial" layoutX="471.0" layoutY="69.0" prefHeight="613.0" prefWidth="1142.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="613.0" prefWidth="158.0" style="-fx-background-color: #212F3D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -264,18 +264,24 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="WHITE" glyphName="TIMES" layoutX="249.0" layoutY="20.0" size="20" />
+            <FontAwesomeIconView fill="WHITE" glyphName="TIMES" layoutX="249.0" layoutY="20.0" onMouseClicked="#closePopUp" size="20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></FontAwesomeIconView>
             <FontAwesomeIconView fill="WHITE" glyphName="EXCLAMATION_CIRCLE" layoutX="22.0" layoutY="37.0" size="40" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="popUpResultado" layoutX="10.0" layoutY="133.0" opacity="0.68" prefHeight="109.0" prefWidth="271.0" style="-fx-background-color: #2471A3; -fx-background-radius: 10 0 0 10;" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
          <children>
-            <Label alignment="CENTER" layoutX="66.0" layoutY="40.0" prefHeight="30.0" prefWidth="216.0" text="É uma fake News" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+            <Label fx:id="mensagemPopUpResultado" alignment="CENTER" layoutX="66.0" layoutY="40.0" prefHeight="30.0" prefWidth="216.0" text="É uma fake News" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="WHITE" glyphName="TIMES" layoutX="249.0" layoutY="20.0" size="20" />
+            <FontAwesomeIconView fill="WHITE" glyphName="TIMES" layoutX="249.0" layoutY="20.0" onMouseClicked="#closePopUp" size="20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></FontAwesomeIconView>
             <FontAwesomeIconView fill="WHITE" glyphName="EXCLAMATION_CIRCLE" layoutX="14.0" layoutY="47.0" size="40" />
          </children>
       </AnchorPane>

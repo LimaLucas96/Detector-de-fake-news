@@ -6,7 +6,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import br.imd.ufrn.lpii.excepitions.FileException;
+import br.imd.ufrn.lpii.modelo.excepitions.FileException;
 
 public class Processar {
 	private BancoDeDados bd;

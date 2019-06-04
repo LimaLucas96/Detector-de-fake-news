@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.excepitions;
+package br.imd.ufrn.lpii.modelo.excepitions;
 
 public class FileException extends Exception{
 
