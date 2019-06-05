@@ -28,7 +28,7 @@ public class Site implements Externos{
 		for (Element step : element) {
 			String temp = step.text();
 		
-			if(temp.length() > 200) {
+			if(temp.length() > 100) {
 				paragrafos.add(temp);
 			}
 		}

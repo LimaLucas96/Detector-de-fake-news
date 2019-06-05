@@ -14,6 +14,10 @@ import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -29,8 +33,10 @@ public class PaginaController {
 	private static BancoDeDados bd;
 	private static Externos site;
 	private static Processar processar;
-	ArrayList<String> textoSite;
 	
+	ArrayList<String> textoSite;
+	ArrayList<Integer> dadosGraficoCos;
+	ArrayList<Integer> dadosGraficoLev;
 	private int maxPorcentCos;
 	private int maxPorcentLev;
 	
@@ -89,7 +95,18 @@ public class PaginaController {
     private Slider sliderSimiliaridade;
     
     @FXML
+    private LineChart<?, ?> graficoLinha;
+
+    @FXML
+    private CategoryAxis x;
+
+    @FXML
+    private NumberAxis y;
+    
+    @FXML
     void initialize() {
+    	dadosGraficoCos = new ArrayList<Integer>();
+    	dadosGraficoLev = new ArrayList<Integer>();
     	telaInicial.setVisible(true);
     	telaPrincial.setVisible(false);
     	arquivo = new Arquivo();
@@ -125,8 +142,6 @@ public class PaginaController {
 			mensagemError.setText(e.getMessage());
 			
 		}
-    	
-    	
     }
 
     @FXML
@@ -141,6 +156,7 @@ public class PaginaController {
     	
     	telaCarregando.setVisible(true);
     	 
+    	
     	Service<Boolean> process = new Service<Boolean>(){
 			@Override
 			protected Task<Boolean> createTask() {
@@ -153,12 +169,26 @@ public class PaginaController {
 						
 						if(checkBoxLevens.isSelected()) {
 							boolean temp = checarLevens();
+							XYChart.Series serie = new XYChart.Series();
 							
+//							for(int i = 0; i < dadosGrafico.size();i++) {
+//								serie.getData().add(new XYChart.Data(""+i,dadosGrafico.get(i)));
+//							}
+//							
+//				    		graficoLinha.getData().add(serie);
+				    		
 							if(!result) { result = temp; }
 							
 						}if(checkBoxCosine.isSelected()) {
 							boolean temp = checarCosine();
-							
+//							XYChart.Series serie = new XYChart.Series();
+//							
+//							for(int i = 0; i < dadosGrafico.size();i++) {
+//								serie.getData().add(new XYChart.Data(""+i,70));
+//							}
+//							
+//				    		graficoLinha.getData().add(serie);
+				    		
 							if(!result) { result = temp; }
 							
 						}
@@ -183,6 +213,8 @@ public class PaginaController {
     		
     		porcentCos.setText(maxPorcentCos + "%");
     		porcentLev.setText(maxPorcentLev + "%");
+    		teste();
+        	
     	});
     	
     	process.setOnFailed(e -> {
@@ -192,8 +224,29 @@ public class PaginaController {
 			
     	});
     	process.start();
+    	
     }
     
+    private void teste() {
+    	graficoLinha.getData().clear();
+    	XYChart.Series serieCos = new XYChart.Series();
+    	XYChart.Series serieLev = new XYChart.Series();
+    	
+		System.out.println(dadosGraficoCos.size());
+		System.out.println(textoSite.size());
+		for(int i = 0; i < dadosGraficoCos.size();i++) {
+			if(checkBoxCosine.isSelected()) {
+				serieCos.getData().add(new XYChart.Data(""+(i+1),dadosGraficoCos.get(i)));
+			
+			}if(checkBoxLevens.isSelected()) {
+			
+				serieLev.getData().add(new XYChart.Data(""+(i+1),dadosGraficoLev.get(i)));
+			}
+			
+		}
+		
+		graficoLinha.getData().addAll(serieCos,serieLev);
+    }
     @FXML
     void closePopUp(MouseEvent event) {
     	popUpError.setVisible(false);
@@ -221,7 +274,7 @@ public class PaginaController {
     private boolean checarLevens() throws Exception {
     	Similaridade similaridade = new Levensthein(bd);
     	
-    	System.out.println(barraUrlSite.getText());
+    	dadosGraficoLev.clear();
     	
     	boolean validador = false;
     	for(int i = 0; i < textoSite.size(); i++) {
@@ -235,12 +288,14 @@ public class PaginaController {
     		}else {
     			int temp = (int) similaridade.verificarSimilaridade(hash);
     			
-    			if(temp > maxPorcentCos) {
+    			dadosGraficoLev.add(temp);
+    			
+    			if(temp > maxPorcentLev) {
     				maxPorcentLev = temp;
     			}
     			if( temp >= sliderSimiliaridade.getValue()) {
     				validador = true;
-    				break;
+    				//break;
     			}
     		}
     	}
@@ -250,26 +305,26 @@ public class PaginaController {
     private boolean checarCosine() throws Exception {
     	Similaridade similaridade = new Cosine(bd);
     	
-    	System.out.println(barraUrlSite.getText());
+    	dadosGraficoCos.clear();
     	
     	boolean validador = false;
     	for(int i = 0; i < textoSite.size(); i++) {
     			
     		String hash = processar.ProcessarConteudo(textoSite.get(i));
-    			
+    		
     		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
     			validador = true;
-    			maxPorcentCos = 100;	
+    			maxPorcentCos = 100;
     			break;
     		}else {
     			int temp = (int) similaridade.verificarSimilaridade(hash);
-    			
+    			dadosGraficoCos.add(temp);
     			if(temp > maxPorcentCos) {
     				maxPorcentCos = temp;
     			}
     			if( temp >= sliderSimiliaridade.getValue()) {
     				validador = true;
-    				break;
+    				//break;
     			}
     		}
     	}

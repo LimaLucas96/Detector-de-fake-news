@@ -91,12 +91,12 @@
                         </AnchorPane>
                      </children>
                   </HBox>
-                  <LineChart legendVisible="false" prefHeight="356.0" prefWidth="924.0" stylesheets="@../css/temp.css" title="Similaridade" VBox.vgrow="ALWAYS">
+                  <LineChart fx:id="graficoLinha" legendVisible="false" prefHeight="356.0" prefWidth="924.0" stylesheets="@../css/temp.css" title="Similaridade" VBox.vgrow="ALWAYS">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis side="BOTTOM" fx:id="x" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis label=" em %" side="LEFT" tickLabelFill="GREY" />
+                        <NumberAxis fx:id="y" label=" em %" side="LEFT" tickLabelFill="GREY" />
                     </yAxis>
                      <VBox.margin>
                         <Insets bottom="10.0" left="30.0" right="30.0" />

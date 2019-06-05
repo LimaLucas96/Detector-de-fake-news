@@ -175,6 +175,7 @@ public class Pagina1{
 	    	}
 	    		
 	    }
+	    
 	    @FXML
 	    void initialize() {
 	    	arquivo = new Arquivo();
