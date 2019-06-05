@@ -186,7 +186,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="0%" textFill="GREY">
+                              <Label fx:id="porcentJaro" text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>

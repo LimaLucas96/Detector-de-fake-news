@@ -27,10 +27,10 @@ public class JaroWinkler extends Similaridade {
 		double jw = j;
 		
 		if(j > 0.7) {
-			jw = j + Math.min(DEFAULT_SCALING_FACTOR, 1 / mTemp[3]) * mTemp[2] * (1 - j);
+			jw = j + Math.min( DEFAULT_SCALING_FACTOR, 1.0 / mTemp[3] ) * mTemp[2] * (1 - j);
 		}
 		
-		return jw * 100;
+		return 100 - (jw * 100);
 	}
 	
 	private int[] matches(String hash, String noticia) {

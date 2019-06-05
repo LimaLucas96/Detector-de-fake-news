@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import br.imd.ufrn.lpii.modelo.Arquivo;
 import br.imd.ufrn.lpii.modelo.BancoDeDados;
 import br.imd.ufrn.lpii.modelo.Cosine;
+import br.imd.ufrn.lpii.modelo.JaroWinkler;
 import br.imd.ufrn.lpii.modelo.Levensthein;
 import br.imd.ufrn.lpii.modelo.Processar;
 import br.imd.ufrn.lpii.modelo.Site;
@@ -37,8 +38,11 @@ public class PaginaController {
 	ArrayList<String> textoSite;
 	ArrayList<Integer> dadosGraficoCos;
 	ArrayList<Integer> dadosGraficoLev;
+	ArrayList<Integer> dadosGraficoJaro;
+	
 	private int maxPorcentCos;
 	private int maxPorcentLev;
+	private int maxPorcentJaro;
 	
 	@FXML
     private AnchorPane telaPrincial;
@@ -90,7 +94,8 @@ public class PaginaController {
 
     @FXML
     private Label porcentLev;
-    
+    @FXML
+    private Label porcentJaro;
     @FXML
     private Slider sliderSimiliaridade;
     
@@ -107,6 +112,8 @@ public class PaginaController {
     void initialize() {
     	dadosGraficoCos = new ArrayList<Integer>();
     	dadosGraficoLev = new ArrayList<Integer>();
+    	dadosGraficoJaro = new ArrayList<Integer>();
+    	
     	telaInicial.setVisible(true);
     	telaPrincial.setVisible(false);
     	arquivo = new Arquivo();
@@ -140,7 +147,6 @@ public class PaginaController {
 		} catch (Exception e) {
 			popUpError.setVisible(true);
 			mensagemError.setText(e.getMessage());
-			
 		}
     }
 
@@ -148,7 +154,10 @@ public class PaginaController {
     void verificaSite(MouseEvent event) {
     	maxPorcentCos = 0;
     	maxPorcentLev = 0;
-    	if(!checkBoxCosine.isSelected() && !checkBoxLevens.isSelected()) {
+    	if(!checkBoxCosine.isSelected() && 
+    			!checkBoxLevens.isSelected() &&
+    			!checkBoxTrigram.isSelected() &&
+    			!checkBoxJaro.isSelected()) {
     		popUpError.setVisible(true);
 			mensagemError.setText( "Nenhum algoritmo selecionado");
 			return;
@@ -169,25 +178,23 @@ public class PaginaController {
 						
 						if(checkBoxLevens.isSelected()) {
 							boolean temp = checarLevens();
-							XYChart.Series serie = new XYChart.Series();
 							
-//							for(int i = 0; i < dadosGrafico.size();i++) {
-//								serie.getData().add(new XYChart.Data(""+i,dadosGrafico.get(i)));
-//							}
-//							
-//				    		graficoLinha.getData().add(serie);
-				    		
 							if(!result) { result = temp; }
 							
 						}if(checkBoxCosine.isSelected()) {
 							boolean temp = checarCosine();
-//							XYChart.Series serie = new XYChart.Series();
+				    		
+							if(!result) { result = temp; }
+							
+						}
+//						if(checkBoxTrigram.isSelected()) {
+//							boolean temp = checarCosine();
+//				    		
+//							if(!result) { result = temp; }
 //							
-//							for(int i = 0; i < dadosGrafico.size();i++) {
-//								serie.getData().add(new XYChart.Data(""+i,70));
-//							}
-//							
-//				    		graficoLinha.getData().add(serie);
+//						}
+						if(checkBoxJaro.isSelected()) {
+							boolean temp = checarJaro();
 				    		
 							if(!result) { result = temp; }
 							
@@ -213,7 +220,8 @@ public class PaginaController {
     		
     		porcentCos.setText(maxPorcentCos + "%");
     		porcentLev.setText(maxPorcentLev + "%");
-    		teste();
+    		porcentJaro.setText(maxPorcentJaro + "%");
+    		geraGrafico();
         	
     	});
     	
@@ -227,25 +235,29 @@ public class PaginaController {
     	
     }
     
-    private void teste() {
+    private void geraGrafico() {
     	graficoLinha.getData().clear();
     	XYChart.Series serieCos = new XYChart.Series();
     	XYChart.Series serieLev = new XYChart.Series();
+    	XYChart.Series serieJaro = new XYChart.Series();
     	
 		System.out.println(dadosGraficoCos.size());
 		System.out.println(textoSite.size());
-		for(int i = 0; i < dadosGraficoCos.size();i++) {
+		
+		for(int i = 0; i < textoSite.size();i++) {
 			if(checkBoxCosine.isSelected()) {
 				serieCos.getData().add(new XYChart.Data(""+(i+1),dadosGraficoCos.get(i)));
 			
 			}if(checkBoxLevens.isSelected()) {
-			
 				serieLev.getData().add(new XYChart.Data(""+(i+1),dadosGraficoLev.get(i)));
+			}
+			if(checkBoxJaro.isSelected()) {
+				serieJaro.getData().add(new XYChart.Data(""+(i+1),dadosGraficoJaro.get(i)));
 			}
 			
 		}
 		
-		graficoLinha.getData().addAll(serieCos,serieLev);
+		graficoLinha.getData().addAll(serieCos, serieLev, serieJaro);
     }
     @FXML
     void closePopUp(MouseEvent event) {
@@ -273,6 +285,7 @@ public class PaginaController {
 
     private boolean checarLevens() throws Exception {
     	Similaridade similaridade = new Levensthein(bd);
+    	System.out.println("iniciando Levens");
     	
     	dadosGraficoLev.clear();
     	
@@ -304,6 +317,7 @@ public class PaginaController {
     
     private boolean checarCosine() throws Exception {
     	Similaridade similaridade = new Cosine(bd);
+    	System.out.println("iniciando Cosine");
     	
     	dadosGraficoCos.clear();
     	
@@ -321,6 +335,36 @@ public class PaginaController {
     			dadosGraficoCos.add(temp);
     			if(temp > maxPorcentCos) {
     				maxPorcentCos = temp;
+    			}
+    			if( temp >= sliderSimiliaridade.getValue()) {
+    				validador = true;
+    				//break;
+    			}
+    		}
+    	}
+    	
+    	return validador;
+    }
+    //FALTA O TRIGRAM ----- LEMBRE DISSO
+    private boolean checarJaro() throws Exception {
+    	Similaridade similaridade = new JaroWinkler(bd);
+    	System.out.println("iniciando Jaro-Winkler");
+    	dadosGraficoJaro.clear();
+    	
+    	boolean validador = false;
+    	for(int i = 0; i < textoSite.size(); i++) {
+    			
+    		String hash = processar.ProcessarConteudo(textoSite.get(i));
+    		
+    		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
+    			validador = true;
+    			maxPorcentJaro = 100;
+    			break;
+    		}else {
+    			int temp = (int) similaridade.verificarSimilaridade(hash);
+    			dadosGraficoJaro.add(temp);
+    			if(temp > maxPorcentJaro) {
+    				maxPorcentJaro = temp;
     			}
     			if( temp >= sliderSimiliaridade.getValue()) {
     				validador = true;
