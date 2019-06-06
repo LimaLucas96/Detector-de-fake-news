@@ -271,7 +271,7 @@ public class PaginaController {
     	
     	FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
     	
-    	File diretorioIicial = new File("/Users/macosx/eclipse-workspace/ProjetoFinal/");
+    	File diretorioIicial = new File("./");
     	
     	fileChoose.getExtensionFilters().add(filter);
     	
