@@ -55,7 +55,7 @@ public class Cosine extends Similaridade {
 	}
 	
 	
-	
+	//teste
     public final double distancia(final String s1, final String s2) {
         if (s1 == null) {
             throw new NullPointerException("s1 must not be null");
