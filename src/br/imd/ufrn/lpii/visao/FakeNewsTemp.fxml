@@ -164,7 +164,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label text="0%" textFill="GREY">
+                              <Label fx:id="porcentTri" text="0%" textFill="GREY">
                                  <font>
                                     <Font size="53.0" />
                                  </font>
