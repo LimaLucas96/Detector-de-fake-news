@@ -35,7 +35,9 @@ public class Site implements Externos{
 			}
 		}
 		
-		paragrafos.add(0,textoVermelho.toString());
+		if(textoVermelho.length() > 2) {
+			paragrafos.add(0,textoVermelho.toString());
+		}
 		
 		return paragrafos;
 	}

@@ -301,8 +301,9 @@ public class PaginaController {
     			
     		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
     			validador = true;
-    			maxPorcentLev = 100;	
-    			break;
+    			maxPorcentLev = 100;
+    			dadosGraficoLev.add(100);
+    			//break;
     		}else {
     			int temp = (int) similaridade.verificarSimilaridade(hash);
     			
@@ -334,7 +335,8 @@ public class PaginaController {
     		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
     			validador = true;
     			maxPorcentCos = 100;
-    			break;
+    			dadosGraficoCos.add(100);
+    			//break;
     		}else {
     			int temp = (int) similaridade.verificarSimilaridade(hash);
     			dadosGraficoCos.add(temp);
