@@ -138,7 +138,7 @@ public class PaginaController {
     	barraBuscaData.setText(url);
     	
     	try {
-    		ArrayList<String> dadosArquivo = arquivo.Abrir(url);
+    		ArrayList<String> dadosArquivo = arquivo.abrir(url);
     		processar.processarArquivo(dadosArquivo);
 			
     		if(!barraBuscaData.getText().isEmpty()) {
@@ -152,8 +152,13 @@ public class PaginaController {
 
     @FXML
     void verificaSite(MouseEvent event) {
+    	
+    	closePopUp(event);
+    	
     	maxPorcentCos = 0;
     	maxPorcentLev = 0;
+    	maxPorcentJaro = 0;
+    	
     	if(!checkBoxCosine.isSelected() && 
     			!checkBoxLevens.isSelected() &&
     			!checkBoxTrigram.isSelected() &&
@@ -174,7 +179,7 @@ public class PaginaController {
 					protected Boolean call() throws Exception {
 						boolean result = false;
 						
-						textoSite = site.Abrir(barraUrlSite.getText());
+						textoSite = site.abrir(barraUrlSite.getText());
 						
 						if(checkBoxLevens.isSelected()) {
 							boolean temp = checarLevens();

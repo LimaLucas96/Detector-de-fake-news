@@ -25,6 +25,7 @@ public class Processar {
 		}
 		
 		for(int i = 1; i < texto.size();i++) {
+		//	System.out.println(texto.get(i));
 			separar(texto.get(i));
 		}
 	}

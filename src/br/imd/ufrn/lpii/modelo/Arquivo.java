@@ -14,7 +14,7 @@ public class Arquivo implements Externos {
 	private File arquivo;
 	
 	@Override
-	public ArrayList<String> Abrir(String url) throws Exception {
+	public ArrayList<String> abrir(String url) throws Exception {
 		arquivo = new File(url);
 		
 		ArrayList<String> texto = new ArrayList<String>();

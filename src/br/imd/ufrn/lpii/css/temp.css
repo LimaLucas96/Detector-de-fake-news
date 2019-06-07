@@ -3,15 +3,6 @@
 	-fx-background-color:  #212F3D;
 }
 
-.root { /* FX theme stylesheet */
--fx-text-background-color: ladder(-fx-background, 45%, -fx-light-text-color, 46%, -fx-dark-text-color, 59%, -fx-dark-text-color, 60%, -fx-mid-text-color);
--fx-background: derive(-fx-base, 26.4%);
--fx-base: #ececec;
--fx-light-text-color: white;
--fx-dark-text-color: black;
--fx-mid-text-color: #333333;
-}
-
 .chart-title { /* FX theme stylesheet */
 -fx-font-size: 2em;
 -fx-text-fill: GREY;
