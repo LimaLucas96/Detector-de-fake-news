@@ -14,6 +14,7 @@ import br.imd.ufrn.lpii.modelo.abstratics.Externos;
 import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -21,6 +22,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -107,6 +109,22 @@ public class PaginaController {
 
     @FXML
     private NumberAxis y;
+    
+    @FXML
+    private ProgressBar barraPorcentLev;
+
+    @FXML
+    private ProgressBar barraPorcentTri;
+    
+    @FXML
+    private ProgressBar barraPorcentCos;
+    
+    @FXML
+    private ProgressBar barraPorcentJW;
+    
+    @FXML
+    private TextField barraSlider;
+
     
     @FXML
     void initialize() {
@@ -226,6 +244,11 @@ public class PaginaController {
     		porcentCos.setText(maxPorcentCos + "%");
     		porcentLev.setText(maxPorcentLev + "%");
     		porcentJaro.setText(maxPorcentJaro + "%");
+    		
+    		barraPorcentCos.setProgress(maxPorcentCos*0.01);
+    		barraPorcentLev.setProgress(maxPorcentLev*0.01);
+    		//barraPorcentTri.setProgress(maxPorcentTri*0.01);
+    		barraPorcentJW.setProgress(maxPorcentJaro*0.01);
     		geraGrafico();
         	
     	});
@@ -240,34 +263,31 @@ public class PaginaController {
     	
     }
     
-    private void geraGrafico() {
-    	graficoLinha.getData().clear();
-    	XYChart.Series serieCos = new XYChart.Series();
-    	XYChart.Series serieLev = new XYChart.Series();
-    	XYChart.Series serieJaro = new XYChart.Series();
-    	
-		System.out.println(dadosGraficoCos.size());
-		System.out.println(textoSite.size());
-		
-		for(int i = 0; i < textoSite.size();i++) {
-			if(checkBoxCosine.isSelected()) {
-				serieCos.getData().add(new XYChart.Data(""+(i+1),dadosGraficoCos.get(i)));
-			
-			}if(checkBoxLevens.isSelected()) {
-				serieLev.getData().add(new XYChart.Data(""+(i+1),dadosGraficoLev.get(i)));
-			}
-			if(checkBoxJaro.isSelected()) {
-				serieJaro.getData().add(new XYChart.Data(""+(i+1),dadosGraficoJaro.get(i)));
-			}
-			
-		}
-		
-		graficoLinha.getData().addAll(serieCos, serieLev, serieJaro);
-    }
+   
     @FXML
     void closePopUp(MouseEvent event) {
     	popUpError.setVisible(false);
     	popUpResultado.setVisible(false);
+    }
+    
+    @FXML
+    void mudarValorSlider(ActionEvent event) {
+    	
+    	int valor =Integer.parseInt(barraSlider.getText());
+    	
+    	if(valor >= 85 && valor <=100) {
+    		System.out.println("passou aqui");
+    		sliderSimiliaridade.setValue(valor);
+    	}else {
+    		barraSlider.setText(""+sliderSimiliaridade.getValue());
+    	}
+    }
+    
+    @FXML
+    void mudaValorBarraSlider(MouseEvent event) {
+    	
+    	int valorTemp = (int)sliderSimiliaridade.getValue();
+    	barraSlider.setText(""+valorTemp);
     }
     
     private String procurarDados() {
@@ -381,5 +401,30 @@ public class PaginaController {
     	}
     	
     	return validador;
+    }
+    
+    private void geraGrafico() {
+    	graficoLinha.getData().clear();
+    	XYChart.Series serieCos = new XYChart.Series();
+    	XYChart.Series serieLev = new XYChart.Series();
+    	XYChart.Series serieJaro = new XYChart.Series();
+    	
+		System.out.println(dadosGraficoCos.size());
+		System.out.println(textoSite.size());
+		
+		for(int i = 0; i < textoSite.size();i++) {
+			if(checkBoxCosine.isSelected()) {
+				serieCos.getData().add(new XYChart.Data(""+(i+1),dadosGraficoCos.get(i)));
+			
+			}if(checkBoxLevens.isSelected()) {
+				serieLev.getData().add(new XYChart.Data(""+(i+1),dadosGraficoLev.get(i)));
+			}
+			if(checkBoxJaro.isSelected()) {
+				serieJaro.getData().add(new XYChart.Data(""+(i+1),dadosGraficoJaro.get(i)));
+			}
+			
+		}
+		
+		graficoLinha.getData().addAll(serieCos, serieLev, serieJaro);
     }
 }
