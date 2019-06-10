@@ -3,16 +3,16 @@ package br.imd.ufrn.lpii.controller;
 import java.io.File;
 import java.util.ArrayList;
 
-import br.imd.ufrn.lpii.modelo.Arquivo;
-import br.imd.ufrn.lpii.modelo.BancoDeDados;
-import br.imd.ufrn.lpii.modelo.Cosine;
-import br.imd.ufrn.lpii.modelo.JaroWinkler;
-import br.imd.ufrn.lpii.modelo.Levensthein;
-import br.imd.ufrn.lpii.modelo.Processar;
-import br.imd.ufrn.lpii.modelo.Site;
-import br.imd.ufrn.lpii.modelo.Trigram;
-import br.imd.ufrn.lpii.modelo.abstratics.Externos;
-import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
+import br.imd.ufrn.lpii.model.Arquivo;
+import br.imd.ufrn.lpii.model.BancoDeDados;
+import br.imd.ufrn.lpii.model.Cosine;
+import br.imd.ufrn.lpii.model.JaroWinkler;
+import br.imd.ufrn.lpii.model.Levensthein;
+import br.imd.ufrn.lpii.model.Processar;
+import br.imd.ufrn.lpii.model.Site;
+import br.imd.ufrn.lpii.model.Trigram;
+import br.imd.ufrn.lpii.model.abstratics.Externos;
+import br.imd.ufrn.lpii.model.abstratics.Similaridade;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -30,9 +30,81 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Lucas Lima
+ *
+ */
 public class PaginaController {
-	
+//	Archors{
+	@FXML
+    private AnchorPane telaPrincial;
+	@FXML
+    private AnchorPane telaInicial;
+  	@FXML
+    private AnchorPane telaCarregando;
+    @FXML
+    private TextField barraUrlSite;
+    @FXML
+    private AnchorPane popUpError;
+    @FXML
+    private AnchorPane popUpResultado;   
+    @FXML
+    private AnchorPane telaGeral;  
+    @FXML
+    private AnchorPane botaoAvancaTela;
+//	}
+//	Labels{
+    @FXML
+    private Label mensagemError;
+    @FXML
+    private Label mensagemPopUpResultado;
+    @FXML
+    private Label porcentLev;
+    @FXML
+    private Label porcentJaro;
+    @FXML
+    private Label porcentTri;
+    @FXML
+    private Slider sliderSimiliaridade;
+    @FXML
+    private Label porcentCos;
+//	}
+//	CheckBoxs{
+    @FXML
+    private CheckBox checkBoxCosine;
+    @FXML
+    private CheckBox checkBoxLevens;
+    @FXML
+    private CheckBox checkBoxTrigram;
+    @FXML
+    private CheckBox checkBoxJaro;
+//	}
+//	TextFields{
+    @FXML
+    private TextField barraBuscaData;
+    @FXML
+    private TextField barraSlider;
+//	}
+//	ProgressBar{
+    @FXML
+    private ProgressBar barraPorcentLev;
+    @FXML
+    private ProgressBar barraPorcentTri; 
+    @FXML
+    private ProgressBar barraPorcentCos;    
+    @FXML
+    private ProgressBar barraPorcentJW;
+//	}
+//	Grafico{
+    @FXML
+    private LineChart<?, ?> graficoLinha;
+    @FXML
+    private CategoryAxis x;
+    @FXML
+    private NumberAxis y;
+//	}
+    
 	private static Externos arquivo;
 	private static BancoDeDados bd;
 	private static Externos site;
@@ -48,89 +120,7 @@ public class PaginaController {
 	private int maxPorcentLev;
 	private int maxPorcentTri;
 	private int maxPorcentJaro;
-	
-	@FXML
-    private AnchorPane telaPrincial;
 
-    @FXML
-    private TextField barraUrlSite;
-
-    @FXML
-    private AnchorPane telaInicial;
-
-    @FXML
-    private TextField barraBuscaData;
-
-    @FXML
-    private AnchorPane telaCarregando;
-
-    @FXML
-    private AnchorPane popUpError;
-
-    @FXML
-    private AnchorPane popUpResultado;
-    
-    @FXML
-    private AnchorPane telaGeral;
-    
-    @FXML
-    private AnchorPane botaoAvancaTela;
-    
-    @FXML
-    private Label mensagemError;
-    
-    @FXML
-    private Label mensagemPopUpResultado;
-    
-    @FXML
-    private CheckBox checkBoxCosine;
-
-    @FXML
-    private CheckBox checkBoxLevens;
-
-    @FXML
-    private CheckBox checkBoxTrigram;
-
-    @FXML
-    private CheckBox checkBoxJaro;
-    
-    @FXML
-    private Label porcentCos;
-
-    @FXML
-    private Label porcentLev;
-    @FXML
-    private Label porcentJaro;
-    @FXML
-    private Label porcentTri;
-    @FXML
-    private Slider sliderSimiliaridade;
-    
-    @FXML
-    private LineChart<?, ?> graficoLinha;
-
-    @FXML
-    private CategoryAxis x;
-
-    @FXML
-    private NumberAxis y;
-    
-    @FXML
-    private ProgressBar barraPorcentLev;
-
-    @FXML
-    private ProgressBar barraPorcentTri;
-    
-    @FXML
-    private ProgressBar barraPorcentCos;
-    
-    @FXML
-    private ProgressBar barraPorcentJW;
-    
-    @FXML
-    private TextField barraSlider;
-
-    
     @FXML
     void initialize() {
     	dadosGraficoCos = new ArrayList<Integer>();
@@ -147,55 +137,68 @@ public class PaginaController {
     }
     
     @FXML
+    /*
+     * Troca a tela inicial para a tela princial.
+     */
     void avancaPagina(MouseEvent event) {
     	telaInicial.setVisible(false);
     	telaPrincial.setVisible(true);
     }
 
     @FXML
+    /*
+     * Função para buscar um arquivo no sistema operacional.
+     */
     void buscaData(MouseEvent event) {
-    	mensagemError.setText("");
     	
     	System.out.println("clicou");
     	
-    	String url = procurarDados();
+    	String url = procurarDados(); //chama funcao ondem tem o FileChoose
     	barraBuscaData.setText(url);
     	
     	try {
-    		ArrayList<String> dadosArquivo = arquivo.abrir(url);
-    		processar.processarArquivo(dadosArquivo);
+    		ArrayList<String> dadosArquivo = arquivo.abrir(url); // Verifica se o arquivo é compativel
+    		processar.processarArquivo(dadosArquivo); // Processa os dados dos arquivos.
 			
+    		// se a barra de busca estiver com algum endereco, o botao de avancar tela é validado.
     		if(!barraBuscaData.getText().isEmpty()) {
         		botaoAvancaTela.setDisable(false);
         	}
-		} catch (Exception e) {
-			popUpError.setVisible(true);
-			mensagemError.setText(e.getMessage());
+		} catch (Exception e) { // se ocorrer algum erro, o sistema abre um pop-up de erro.
+			popUpError.setVisible(true); 
+			mensagemError.setText(e.getMessage()); // memsagem do erro tratado.
 		}
     }
 
     @FXML
+    /*
+     * Evento chamado quando o usuario clica para verificar o link da fake news
+     */
     void verificaSite(MouseEvent event) {
     	
-    	closePopUp(event);
+    	closePopUp(event); //fecha qualquer pop-pu aberto no momento.
     	
+    	// zera todos os contadores
     	maxPorcentCos = 0;
     	maxPorcentLev = 0;
     	maxPorcentTri = 0;
     	maxPorcentJaro = 0;
     	
+    	// verifica se algum checkbox foi marcado
     	if(!checkBoxCosine.isSelected() && 
     			!checkBoxLevens.isSelected() &&
     			!checkBoxTrigram.isSelected() &&
     			!checkBoxJaro.isSelected()) {
+    		
     		popUpError.setVisible(true);
-			mensagemError.setText( "Nenhum algoritmo selecionado");
-			return;
+			mensagemError.setText( "Nenhum algoritmo selecionado"); // memsagem do pop-up
+			
+			return; //para o evento
 		}
     	
-    	telaCarregando.setVisible(true);
+    	telaCarregando.setVisible(true); // abre a tela com a mensagem "carregando".
     	 
-    	
+    	//inicia um processo em segundo plano, e assim poder finalizar o evento com mais velocidade.
     	Service<Boolean> process = new Service<Boolean>(){
 			@Override
 			protected Task<Boolean> createTask() {
@@ -204,7 +207,7 @@ public class PaginaController {
 					protected Boolean call() throws Exception {
 						boolean result = false;
 						
-						textoSite = site.abrir(barraUrlSite.getText());
+						textoSite = site.abrir(barraUrlSite.getText()); //executa o web scraping
 						
 						if(checkBoxLevens.isSelected()) {
 							boolean temp = checarLevens();
@@ -236,6 +239,7 @@ public class PaginaController {
     		
     	};
     	
+    	// se tudo ocorreu bem no segundo plano
     	process.setOnSucceeded(e -> {
     		telaCarregando.setVisible(false);
     		boolean processResult = process.getValue();
@@ -260,14 +264,14 @@ public class PaginaController {
     		geraGrafico();
         	
     	});
-    	
+    	// se tiver o corrido algum erro
     	process.setOnFailed(e -> {
     		telaCarregando.setVisible(false);
     		popUpError.setVisible(true);
 			mensagemError.setText( process.getException().getMessage() );
 			
     	});
-    	process.start();
+    	process.start(); // inicia o processo em segundo plano
     	
     }
     
@@ -323,6 +327,7 @@ public class PaginaController {
     	dadosGraficoLev.clear();
     	
     	boolean validador = false;
+    	
     	for(int i = 0; i < textoSite.size(); i++) {
 			
     		String hash = processar.ProcessarConteudo(textoSite.get(i));
@@ -381,7 +386,7 @@ public class PaginaController {
     	System.out.println("fim Cosine");
     	return validador;
     }
-    //FALTA O TRIGRAM ----- LEMBRE DISSO
+    
     private boolean checarTrigram() throws Exception {
     	Similaridade similaridade = new Trigram(bd);
     	

@@ -1,15 +1,15 @@
-package br.imd.ufrn.lpii.modelo;
+package br.imd.ufrn.lpii.model;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
+import br.imd.ufrn.lpii.model.abstratics.Similaridade;
 
 public class Cosine extends Similaridade {
 	
-	private static final Pattern SPACE_REG = Pattern.compile("\\s+");
+	private static final Pattern SPACE_REG = Pattern.compile("\\s+"); // uniao das strings
 	
 	private static final int K = 5;
 	
@@ -18,13 +18,6 @@ public class Cosine extends Similaridade {
 	}
 	
     public final double distancia(final String s1, final String s2) {
-        if (s1 == null) {
-            throw new NullPointerException("s1 must not be null");
-        }
-
-        if (s2 == null) {
-            throw new NullPointerException("s2 must not be null");
-        }
 
         if (s1.equals(s2)) {
             return 1;
@@ -40,12 +33,10 @@ public class Cosine extends Similaridade {
         return (dotProduct(profile1, profile2)
                 / (norm(profile1) * norm(profile2)))*100;
     }
-
     /**
-     * Compute the norm L2 : sqrt(Sum_i( v_i²)).
-     *
-     * @param profile
-     * @return L2 norm
+     * Processa o produto escalar de uma string ao quadrado
+     * @param profile um map contendo uma string
+     * @return o valor da equação ao quadrado
      */
     private static double norm(final Map<String, Integer> profile) {
         double agg = 0;
@@ -56,7 +47,12 @@ public class Cosine extends Similaridade {
 
         return Math.sqrt(agg);
     }
-
+    /**
+     * Produto escalar de duas string diferentes
+     * @param profile1 map com uma string
+     * @param profile2 map com uma string
+     * @return o resultado do produto escalar
+     */
     private static double dotProduct(
             final Map<String, Integer> profile1,
             final Map<String, Integer> profile2) {
@@ -80,7 +76,6 @@ public class Cosine extends Similaridade {
 
         return agg;
     }
-    
     
     public final Map<String, Integer> getProfile(final String string) {
         HashMap<String, Integer> shingles = new HashMap<String, Integer>();

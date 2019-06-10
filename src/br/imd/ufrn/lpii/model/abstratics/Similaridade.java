@@ -1,6 +1,6 @@
-package br.imd.ufrn.lpii.modelo.abstratics;
+package br.imd.ufrn.lpii.model.abstratics;
 
-import br.imd.ufrn.lpii.modelo.BancoDeDados;
+import br.imd.ufrn.lpii.model.BancoDeDados;
 
 public abstract class Similaridade {
 	

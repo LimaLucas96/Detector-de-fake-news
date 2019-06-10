@@ -6,19 +6,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class prin extends Application {
+public class principal extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Pane root = FXMLLoader.load(getClass().getResource("../visao/fakeNewsTemp.fxml"));
+		Pane root = FXMLLoader.load(getClass().getResource("../view/TelaFakeNews.fxml"));
 		
-		Scene scene = new Scene(root,1142,682);
-		primaryStage.setTitle("FakeNews");
-		primaryStage.setScene(scene);
-		//primaryStage.setResizable(false);
-		primaryStage.show();
+		Scene scene = new Scene(root,1142,682); //instancia a tela para abrir no tamanho 1142x682
+		primaryStage.setTitle("FakeNews");	//titulo da tela
+		primaryStage.setScene(scene); 
+		
+		primaryStage.show(); //inicia a tela fake news
 		
 	}
 	

@@ -1,6 +1,6 @@
-package br.imd.ufrn.lpii.modelo;
+package br.imd.ufrn.lpii.model;
 
-import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
+import br.imd.ufrn.lpii.model.abstratics.Similaridade;
 
 public class Levensthein extends Similaridade {
 

@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.modelo.abstratics;
+package br.imd.ufrn.lpii.model.abstratics;
 
 import java.util.ArrayList;
 

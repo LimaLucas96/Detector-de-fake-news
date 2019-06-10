@@ -38,28 +38,28 @@
          <children>
             <AnchorPane prefHeight="613.0" prefWidth="158.0" style="-fx-background-color: #212F3D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <CheckBox fx:id="checkBoxCosine" layoutX="32.0" layoutY="45.0" mnemonicParsing="false" selected="true" text="Cosine" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="45.0">
+                  <CheckBox fx:id="checkBoxCosine" layoutX="32.0" layoutY="45.0" mnemonicParsing="false" selected="true" stylesheets="@css/temp.css" text="Cosine" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="45.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="checkBoxLevens" layoutX="32.0" layoutY="75.0" mnemonicParsing="false" selected="true" text="Levens" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="75.0">
+                  <CheckBox fx:id="checkBoxLevens" layoutX="32.0" layoutY="75.0" mnemonicParsing="false" selected="true" stylesheets="@css/temp.css" text="Levens" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="75.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="checkBoxTrigram" layoutX="32.0" layoutY="105.0" mnemonicParsing="false" text="Trigram" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="105.0">
+                  <CheckBox fx:id="checkBoxTrigram" layoutX="32.0" layoutY="105.0" mnemonicParsing="false" stylesheets="@css/temp.css" text="Trigram" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="105.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="checkBoxJaro" layoutX="32.0" layoutY="135.0" mnemonicParsing="false" selected="true" text="Jaro-Winkler" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="135.0">
+                  <CheckBox fx:id="checkBoxJaro" layoutX="32.0" layoutY="135.0" mnemonicParsing="false" selected="true" stylesheets="@css/temp.css" text="Jaro-Winkler" textFill="#808b96" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="135.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
                   <Slider fx:id="sliderSimiliaridade" layoutX="10.0" layoutY="256.0" min="85.0" onMouseClicked="#mudaValorBarraSlider" prefHeight="14.0" prefWidth="100.0" value="85.0" />
-                  <TextField fx:id="barraSlider" layoutX="110.0" layoutY="250.0" onAction="#mudarValorSlider" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #17202A;" stylesheets="@../css/temp.css" text="85" />
+                  <TextField fx:id="barraSlider" layoutX="110.0" layoutY="250.0" onAction="#mudarValorSlider" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #17202A;" stylesheets="@css/temp.css" text="85" />
                   <Separator layoutY="236.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="236.0" />
                </children>
             </AnchorPane>
@@ -67,7 +67,7 @@
                <children>
                   <HBox prefHeight="37.0" prefWidth="984.0">
                      <children>
-                        <TextField fx:id="barraUrlSite" prefHeight="35.0" prefWidth="809.0" promptText="https://" style="-fx-background-color: #212F3D; -fx-background-radius: 5 0 0 5;" stylesheets="@../css/temp.css" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="barraUrlSite" prefHeight="35.0" prefWidth="809.0" promptText="https://" style="-fx-background-color: #212F3D; -fx-background-radius: 5 0 0 5;" stylesheets="@css/temp.css" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -91,7 +91,7 @@
                         </AnchorPane>
                      </children>
                   </HBox>
-                  <LineChart fx:id="graficoLinha" legendVisible="false" prefHeight="356.0" prefWidth="924.0" stylesheets="@../css/temp.css" title="Similaridade" VBox.vgrow="ALWAYS">
+                  <LineChart fx:id="graficoLinha" legendVisible="false" prefHeight="356.0" prefWidth="924.0" stylesheets="@css/temp.css" title="Similaridade" VBox.vgrow="ALWAYS">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" fx:id="x" />
                     </xAxis>
@@ -104,7 +104,7 @@
                   </LineChart>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="box" stylesheets="@temp.css" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="box" HBox.hgrow="ALWAYS">
                            <children>
                               <Label alignment="CENTER" text="Cosine" textAlignment="CENTER" textFill="GREY">
                                  <font>
@@ -129,7 +129,7 @@
                               <Insets bottom="10.0" />
                            </HBox.margin>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="box" stylesheets="@temp.css" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="box" HBox.hgrow="ALWAYS">
                            <children>
                               <Label alignment="CENTER" text="Levens" textAlignment="CENTER" textFill="GREY">
                                  <font>
@@ -228,7 +228,7 @@
                </children>
             </VBox>
             <FontAwesomeIconView fill="GREY" glyphName="FOLDER" layoutX="180.0" layoutY="66.0" size="40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="31.71428680419922" />
-            <TextField fx:id="barraBuscaData" layoutX="240.0" layoutY="28.0" onAction="#buscaData" prefHeight="50.0" prefWidth="780.0" promptText="C:/" style="-fx-background-color: #212F3D; -fx-background-radius: 15 0 0 15;" stylesheets="@../css/temp.css" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="28.0" />
+            <TextField fx:id="barraBuscaData" layoutX="240.0" layoutY="28.0" onAction="#buscaData" prefHeight="50.0" prefWidth="780.0" promptText="C:/" style="-fx-background-color: #212F3D; -fx-background-radius: 15 0 0 15;" stylesheets="@css/temp.css" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="28.0" />
             <AnchorPane layoutX="1020.0" layoutY="28.0" onMouseClicked="#buscaData" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #212F3D; -fx-background-radius: 0 15 15 0;" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="28.0">
                <children>
                   <FontAwesomeIconView fill="GREY" glyphName="SEARCH" layoutX="26.0" layoutY="35.0" size="30" />

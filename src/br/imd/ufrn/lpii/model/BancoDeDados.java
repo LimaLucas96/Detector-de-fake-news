@@ -1,4 +1,4 @@
-package br.imd.ufrn.lpii.modelo;
+package br.imd.ufrn.lpii.model;
 
 import java.util.HashMap;
 import java.util.Set;

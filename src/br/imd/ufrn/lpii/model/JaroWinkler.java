@@ -1,8 +1,8 @@
-package br.imd.ufrn.lpii.modelo;
+package br.imd.ufrn.lpii.model;
 
 import java.util.Arrays;
 
-import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
+import br.imd.ufrn.lpii.model.abstratics.Similaridade;
 
 public class JaroWinkler extends Similaridade {
 
