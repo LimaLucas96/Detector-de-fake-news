@@ -1,0 +1,60 @@
+
+.chart-plot-background{
+	-fx-background-color:  #212F3D;
+}
+
+.chart-title { /* FX theme stylesheet */
+-fx-font-size: 2em;
+-fx-text-fill: GREY;
+}
+
+.axis:left>*.axis-label  { /* FX theme stylesheet */
+-fx-text-fill: GREY;
+}
+.text-field{
+	-fx-prompt-text-fill:  #17202A;
+	-fx-text-fill: GREY;
+}
+
+.check-box{
+	-fx-text-fill: #d3d0d0;
+}
+.check-box{
+	-fx-font-size: 14px;
+}
+.check-box .box {
+    -fx-border-width: 3px;
+    -fx-border-color: #d3d0d0;
+    -fx-background-color: null;
+    -fx-background-image: null;
+    -fx-padding: 3px;
+}
+.check-box:selected{
+	-fx-text-fill: #0DFF92;
+}
+
+.check-box:selected .box {
+    -fx-border-width: 3px;
+    -fx-border-color: #0DFF92;
+}
+
+.check-box .box {
+    -fx-background-radius: 15px;
+    -fx-background-color: null;
+    -fx-padding: 3px;
+}
+
+.check-box:selected .mark {
+    -fx-background-radius: 15px;
+    -fx-background-color: #0DFF92;
+}
+.slider .track{
+	-fx-background-color:  #17202A;
+}
+.slider .thumb{
+	-fx-background-color:  #0DFF92;
+}
+
+.check-box:hover .box {
+    -fx-border-radius: 5px;
+}
