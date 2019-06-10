@@ -10,6 +10,7 @@ import br.imd.ufrn.lpii.modelo.JaroWinkler;
 import br.imd.ufrn.lpii.modelo.Levensthein;
 import br.imd.ufrn.lpii.modelo.Processar;
 import br.imd.ufrn.lpii.modelo.Site;
+import br.imd.ufrn.lpii.modelo.Trigram;
 import br.imd.ufrn.lpii.modelo.abstratics.Externos;
 import br.imd.ufrn.lpii.modelo.abstratics.Similaridade;
 import javafx.concurrent.Service;
@@ -40,10 +41,12 @@ public class PaginaController {
 	ArrayList<String> textoSite;
 	ArrayList<Integer> dadosGraficoCos;
 	ArrayList<Integer> dadosGraficoLev;
+	ArrayList<Integer> dadosGraficoTri;
 	ArrayList<Integer> dadosGraficoJaro;
 	
 	private int maxPorcentCos;
 	private int maxPorcentLev;
+	private int maxPorcentTri;
 	private int maxPorcentJaro;
 	
 	@FXML
@@ -99,6 +102,8 @@ public class PaginaController {
     @FXML
     private Label porcentJaro;
     @FXML
+    private Label porcentTri;
+    @FXML
     private Slider sliderSimiliaridade;
     
     @FXML
@@ -131,6 +136,7 @@ public class PaginaController {
     	dadosGraficoCos = new ArrayList<Integer>();
     	dadosGraficoLev = new ArrayList<Integer>();
     	dadosGraficoJaro = new ArrayList<Integer>();
+    	dadosGraficoTri = new ArrayList<Integer>();
     	
     	telaInicial.setVisible(true);
     	telaPrincial.setVisible(false);
@@ -175,6 +181,7 @@ public class PaginaController {
     	
     	maxPorcentCos = 0;
     	maxPorcentLev = 0;
+    	maxPorcentTri = 0;
     	maxPorcentJaro = 0;
     	
     	if(!checkBoxCosine.isSelected() && 
@@ -210,12 +217,12 @@ public class PaginaController {
 							if(!result) { result = temp; }
 							
 						}
-//						if(checkBoxTrigram.isSelected()) {
-//							boolean temp = checarCosine();
-//				    		
-//							if(!result) { result = temp; }
-//							
-//						}
+						if(checkBoxTrigram.isSelected()) {
+							boolean temp = checarTrigram();
+				    		
+							if(!result) { result = temp; }
+							
+						}
 						if(checkBoxJaro.isSelected()) {
 							boolean temp = checarJaro();
 				    		
@@ -244,10 +251,11 @@ public class PaginaController {
     		porcentCos.setText(maxPorcentCos + "%");
     		porcentLev.setText(maxPorcentLev + "%");
     		porcentJaro.setText(maxPorcentJaro + "%");
+    		porcentTri.setText(maxPorcentTri + "%");
     		
     		barraPorcentCos.setProgress(maxPorcentCos*0.01);
     		barraPorcentLev.setProgress(maxPorcentLev*0.01);
-    		//barraPorcentTri.setProgress(maxPorcentTri*0.01);
+    		barraPorcentTri.setProgress(maxPorcentTri*0.01);
     		barraPorcentJW.setProgress(maxPorcentJaro*0.01);
     		geraGrafico();
         	
@@ -338,6 +346,7 @@ public class PaginaController {
     			}
     		}
     	}
+    	System.out.println("fim Levens");
     	return validador;
     }
     
@@ -369,10 +378,46 @@ public class PaginaController {
     			}
     		}
     	}
-    	
+    	System.out.println("fim Cosine");
     	return validador;
     }
     //FALTA O TRIGRAM ----- LEMBRE DISSO
+    private boolean checarTrigram() throws Exception {
+    	Similaridade similaridade = new Trigram(bd);
+    	
+    	System.out.println("iniciando Trigram");
+    	
+    	dadosGraficoTri.clear();
+    	
+    	boolean validador = false;
+    	for(int i = 0; i < textoSite.size(); i++) {
+    			
+    		String hash = processar.ProcessarConteudo(textoSite.get(i));
+    		
+    		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
+    			validador = true;
+    			maxPorcentTri = 100;
+    			dadosGraficoTri.add(100);
+    			//break;
+    		}else {
+    			
+    			int temp = (int) similaridade.verificarSimilaridade(hash);
+    			
+    			dadosGraficoTri.add(temp);
+    			
+    			if(temp > maxPorcentTri) {
+    				maxPorcentTri = temp;
+    			}
+    			if( temp >= sliderSimiliaridade.getValue()) {
+    				validador = true;
+    				//break;
+    			}
+    		}
+    	}
+    	System.out.println("fim Trigram");
+    	return validador;
+    }
+     
     private boolean checarJaro() throws Exception {
     	Similaridade similaridade = new JaroWinkler(bd);
     	System.out.println("iniciando Jaro-Winkler");
@@ -386,7 +431,8 @@ public class PaginaController {
     		if(bd.buscaBancoDeDados(processar.criarHash(hash))) {
     			validador = true;
     			maxPorcentJaro = 100;
-    			break;
+    			dadosGraficoJaro.add(100);
+    			//break;
     		}else {
     			int temp = (int) similaridade.verificarSimilaridade(hash);
     			dadosGraficoJaro.add(temp);
@@ -400,6 +446,7 @@ public class PaginaController {
     		}
     	}
     	
+    	System.out.println("fim Jaro-Winkler");
     	return validador;
     }
     
@@ -407,6 +454,7 @@ public class PaginaController {
     	graficoLinha.getData().clear();
     	XYChart.Series serieCos = new XYChart.Series();
     	XYChart.Series serieLev = new XYChart.Series();
+    	XYChart.Series serieTri = new XYChart.Series();
     	XYChart.Series serieJaro = new XYChart.Series();
     	
 		System.out.println(dadosGraficoCos.size());
@@ -422,9 +470,11 @@ public class PaginaController {
 			if(checkBoxJaro.isSelected()) {
 				serieJaro.getData().add(new XYChart.Data(""+(i+1),dadosGraficoJaro.get(i)));
 			}
-			
+			if(checkBoxTrigram.isSelected()) {
+				serieTri.getData().add(new XYChart.Data(""+(i+1),dadosGraficoTri.get(i)));
+			}
 		}
 		
-		graficoLinha.getData().addAll(serieCos, serieLev, serieJaro);
+		graficoLinha.getData().addAll(serieCos, serieLev, serieTri, serieJaro);
     }
 }
