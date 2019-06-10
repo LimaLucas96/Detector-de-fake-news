@@ -16,46 +16,7 @@ public class Cosine extends Similaridade {
 	public Cosine(BancoDeDados bd) {
 		super(bd);
 	}
-
-//	@Override
-//	public double distancia(String hash, String noticia) {
-//		return(produtoEscalar(hash, noticia) / (Math.sqrt(produtoEscalar(hash, hash))*
-//				Math.sqrt(produtoEscalar(noticia, noticia))))*100;
-//	}
 	
-	private int produtoEscalar(String a, String b) {
-		
-		int max = 0, min = 0;
-		
-		if(a.length() != b.length() ) {
-			return 0;
-		}
-		if(a.length() > b.length()) {
-			max = a.length();
-			min = b.length();
-		}else {
-			max = b.length();
-			min = a.length();
-		}
-		
-		int produto = 0;
-		
-		for(int i = 0; i < max; i ++) {
-			if( i < a.length() && i < b.length()) {
-				produto += (a.charAt(i)) 
-						* (b.charAt(i));
-			}else if(i < a.length() && i > b.length()) {
-				produto -= a.charAt(i);
-			}else if( i < b.length()) {
-				produto -= b.charAt(i);
-			}
-		}
-		
-		return produto;	
-	}
-	
-	
-	//teste
     public final double distancia(final String s1, final String s2) {
         if (s1 == null) {
             throw new NullPointerException("s1 must not be null");
