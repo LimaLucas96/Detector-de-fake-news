@@ -12,10 +12,19 @@ Para compilar o codigo fonte do projeto, sera preciso ter insatalado o [eclipse]
 
 ---
 
-1. Importe o projeto para o eclipse
-2. Abra o _package_ __br.imd.ufrn.lpii.app__
-3. Abra a classe __Principal__
-4. clique em __Run__ para executar o sistema
+#### Importar projeto no Eclipse
+
+1. Abra o eclipse.
+2. Clique em File > Import.
+3. Na pagina Select da caixa de dialogo Importar, selecione Existing Projects into Workspacena caixa de listagem e avancar.
+4. Na pagina Import Projects marque a opcao Select root directory e clique no botao Browse.
+5. Clique em Finish
+
+#### Compilar o projeto
+
+1. Abra o _package_ __br.imd.ufrn.lpii.app__
+2. Abra a classe __Principal__
+3. clique em __Run__ para executar o sistema
 
 ---
 
