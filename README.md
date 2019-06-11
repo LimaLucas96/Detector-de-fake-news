@@ -16,7 +16,7 @@ Para compilar o codigo fonte do projeto, sera preciso ter insatalado o [eclipse]
 
 1. Abra o Eclipse.
 2. Clique em __File > Import__.
-3. Na pagina Select da caixa de dialogo Importar, selecione __Existing Projects into Workspacena__ na caixa de listagem e clique em __Next__.
+3. Na pagina Select da caixa de dialogo Importar, selecione __Existing Projects into Workspace__ na caixa de listagem e clique em __Next__.
 4. Na pagina __Import Projects__ marque a opção __Select root directory__ e clique no botão __Browse__.
 5. Clique em __Finish__.
 
