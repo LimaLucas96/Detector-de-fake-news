@@ -461,9 +461,6 @@ public class PaginaController {
     	XYChart.Series serieLev = new XYChart.Series();
     	XYChart.Series serieTri = new XYChart.Series();
     	XYChart.Series serieJaro = new XYChart.Series();
-    	
-		System.out.println(dadosGraficoCos.size());
-		System.out.println(textoSite.size());
 		
 		for(int i = 0; i < textoSite.size();i++) {
 			if(checkBoxCosine.isSelected()) {
