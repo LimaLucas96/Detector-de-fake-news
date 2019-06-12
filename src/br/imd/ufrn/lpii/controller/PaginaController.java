@@ -456,7 +456,9 @@ public class PaginaController {
     }
     
     private void geraGrafico() {
+    	
     	graficoLinha.getData().clear();
+    	
     	XYChart.Series serieCos = new XYChart.Series();
     	XYChart.Series serieLev = new XYChart.Series();
     	XYChart.Series serieTri = new XYChart.Series();
