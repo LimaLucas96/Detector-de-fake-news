@@ -1,6 +1,6 @@
-# Detector de fake news
+# Detector de Fake News
 
-## Introducao
+## Introdução
 
 _Fake News_, ou notícias falsas, são informações que não representam a realidade, mas que são compartilhadas na internet como se fossem verídicas, principalmente através de sites e das redes sociais. Atualmente as _Fake News_ representam um problema atual e muito sério, pois representam um perigo quando usado para dar prejuízos econômicos, sociais e humanos.
 
